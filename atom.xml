@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jason(jinsk)</title>
+  <subtitle>向着目标前行</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.jinsk.vip/"/>
+  <updated>2017-04-22T01:21:52.000Z</updated>
+  <id>http://www.jinsk.vip/</id>
+  
+  <author>
+    <name>金尚坤</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>我自己的博客小窝上线了</title>
+    <link href="http://www.jinsk.vip/2017/04/21/hello-world/"/>
+    <id>http://www.jinsk.vip/2017/04/21/hello-world/</id>
+    <published>2017-04-21T01:26:24.000Z</published>
+    <updated>2017-04-22T01:21:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; 
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
