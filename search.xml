@@ -4,7 +4,7 @@
     
     <entry>
       <title><![CDATA[我自己的博客小窝上线了]]></title>
-      <url>/2017/04/21/hello-world/</url>
+      <url>/2017/04/21/first/</url>
       <content type="html"><![CDATA[<h3 id="本窝目的"><a href="#本窝目的" class="headerlink" title="本窝目的"></a>本窝目的</h3><p>作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来。<br>随便回顾一下本博所搭建运用的技术，因此也是我需要学习的新知识，如：markdown语法， hexo框架，github管理及git工具。</p>
 <h3 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h3><ul>
 <li>Github<blockquote>
@@ -12,7 +12,7 @@
 </blockquote>
 </li>
 <li>本地搭建hexo环境<blockquote>
-<p>安装hexo<br>创建博客模板<br>配置github帐号<br>安装插件<br>下载主题并汉化</p>
+<p>安装Node.js<br>安装hexo<br>创建博客项目<br>配置github帐号<br>安装插件<br>下载主题并汉化</p>
 </blockquote>
 </li>
 <li>安装Markdown环境<blockquote>
@@ -22,6 +22,20 @@
 </ul>
 ]]></content>
       
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+            <tag> 环境搭建 </tag>
+            
+        </tags>
         
     </entry>
     
