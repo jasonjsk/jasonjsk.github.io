@@ -183,7 +183,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/21/first/">我自己的博客小窝上线了</a>
+            <a class="article-title" href="/2017/04/21/first/">我的博客小窝上线了</a>
         </h1>
     
 
@@ -225,7 +225,7 @@
 </blockquote>
 </li>
 <li>本地搭建hexo环境<blockquote>
-<p>安装Node.js<br>安装hexo<br>创建博客项目<br>配置github帐号<br>安装插件<br>下载主题并汉化</p>
+<p>安装Node.js<br>安装hexo<br>创建博客项目<br>配置github帐号<br>安装插件<br><a href="https://hexo.io/themes/" target="_blank" rel="external">选择主题</a><br>下载并配置主题（本人选择了<a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external">icarus</a>）</p>
 </blockquote>
 </li>
 <li>安装Markdown环境<blockquote>
@@ -233,6 +233,30 @@
 </blockquote>
 </li>
 </ul>
+<h3 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h3><h6 id="上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。"><a href="#上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。" class="headerlink" title="上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。"></a>上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。</h6><ul>
+<li><p>主题汉化</p>
+<blockquote>
+<p>1.下载就略过了，git clone 对应的主题到本地themes目录下<br>2.我一开始还对主题的各个页面进行了汉化修改，但实际上并不需要，只要把主配置文件_config.yml中语言项配置为zh-CN即可，即(language: zh-CN)</p>
+</blockquote>
+</li>
+<li><p>自定义域名配置</p>
+<blockquote>
+<p>如果你也和我一样，专门申请了一个专用的域名，那么会在github中配置costom domain,但是每次重新发布之后，又需要重新设置<br><strong>解决办法</strong>：在项目source目录中创建CNAME文件，在里面写上自己的域名即可，再重新发即不需要重新设置了</p>
+</blockquote>
+</li>
+<li><p>评论支持功能配置</p>
+<blockquote>
+<p>1.社会化评论系统选择，我首先参考了网上很多朋友使用的友言，我开始配置了，发现发布github上之后，提交评论时提示参数不正确，无法提交评论内容，于是，转而尝试多说，但是遗憾多说将在6.1日关停评论服务，所以，后来我选择了”<a href="http://changyan.kuaizhan.com/" target="_blank" rel="external">搜狐畅言</a>“<br>2.对于畅言来说，配置还是挺简单的，注册好帐号就能找到appid和conf两个东西，配置上就OK了<br>3.配置主题中_config.yml-&gt;comment: changyan: 两项，并不需要网上所说修改artcle.ejs了，因为，新版的主题直接在最下边处理好了,在index.ejs中针对支持的评论系统做好了处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%- partial(&apos;comment/index&apos;) %&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>分类和标签通过菜单进入无内容显示</p>
+<blockquote>
+<p><strong>解决办法</strong>：把主题下面边的categories里的index.md复制到项目的source里categories目录里的index.md进行替换，其实也就是参考主题里的写法就好了；标签的也一样。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><p>希望大家多多指教，多多交流，左边二维码是我的微信，欢迎加我好友进行交流，相互学习。</p>
 
         
         </div>
@@ -243,7 +267,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj1yrfrn10002zer5w2yjma37" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj1ytjtre0002kpr5hbr3p5fu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -346,7 +370,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
-                            <p class="item-title"><a href="/2017/04/21/first/" class="title">我自己的博客小窝上线了</a></p>
+                            <p class="item-title"><a href="/2017/04/21/first/" class="title">我的博客小窝上线了</a></p>
                             <p class="item-date"><time datetime="2017-04-21T01:26:24.000Z" itemprop="datePublished">2017-04-21</time></p>
                         </div>
                     </li>
