@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jinsk.vip/"/>
-  <updated>2017-04-25T09:05:57.000Z</updated>
+  <updated>2017-04-25T09:55:56.000Z</updated>
   <id>http://www.jinsk.vip/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.jinsk.vip/2017/04/21/first/"/>
     <id>http://www.jinsk.vip/2017/04/21/first/</id>
     <published>2017-04-21T01:26:24.000Z</published>
-    <updated>2017-04-25T09:05:57.000Z</updated>
+    <updated>2017-04-25T09:55:56.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="本窝目的"><a href="#本窝目的" class="headerlink" title="本窝目的"></a>本窝目的</h3><p>作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来。<br>随便回顾一下本博所搭建运用的技术，因此也是我需要学习的新知识，如：markdown语法， hexo框架，github管理及git工具。</p>
 <h3 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h3><ul>
@@ -48,9 +48,9 @@
       <category term="技术" scheme="http://www.jinsk.vip/Categories/technology/"/>
     
     
-      <category term="随笔" scheme="http://www.jinsk.vip/Tags/%E9%9A%8F%E7%AC%94/"/>
-    
       <category term="环境搭建" scheme="http://www.jinsk.vip/Tags/setup/"/>
+    
+      <category term="随笔日志" scheme="http://www.jinsk.vip/Tags/diary/"/>
     
   </entry>
   
