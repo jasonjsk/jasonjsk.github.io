@@ -223,10 +223,10 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><h3 id="netdata简介"><a href="#netdata简介" class="headerlink" title="netdata简介"></a>netdata简介</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？</p>
+            <p><h3 id="netdata简介"><a href="#netdata简介" class="headerlink" title="netdata简介"></a>netdata简介</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;这是个开源项目，地址为(<a href="https://github.com/firehol/netdata/wiki)。">https://github.com/firehol/netdata/wiki)。</a><br>&nbsp;&nbsp;&nbsp;&nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;”netdata is a scalable, distributed, real-time, performance and health monitoring solution for Linux, FreeBSD and MacOS. It is open-source too.”</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;netdata是一个可扩展的，分布式的，实时的，为Linux, FreeBSD和MacOS性能及健康状态监控的解决方案，当然它也是开源的。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;它可以监控服务器的健康运行参数及状态，包括CPU,内存，网络，磁盘等常用的监控指标，以及自己配置扩展监控项，如，redis, tomcat, mysql等，是不是已经觉得很不错了？那接下来我说说我是怎么安装的，怎么配置的吧。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它可以监控服务器的健康运行参数及状态，包括CPU,内存，网络，磁盘等常用的监控指标，以及自己配置扩展监控项，如，redis, tomcat, mysql, nginx, elasticsearch等，是不是已经觉得很不错了？那接下来我说说我是怎么安装的，怎么配置的吧。</p>
 <h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><ul>
 <li><p>下载</p>
 <blockquote>
@@ -242,7 +242,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./netdata-installer.sh</div></pre></td></tr></table></figure>
 <p>完事你会看到如下提示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">It will be installed at these locations:</div><div class="line">  - the daemon     at /usr/sbin/netdata</div><div class="line">  - config files   in /etc/netdata</div><div class="line">  - web files      in /usr/share/netdata</div><div class="line">  - plugins        in /usr/libexec/netdata</div><div class="line">  - cache files    in /var/cache/netdata</div><div class="line">  - db files       in /var/lib/netdata</div><div class="line">  - log files      in /var/log/netdata</div><div class="line">  - pid file       at /var/run/netdata.pid</div><div class="line">  - logrotate file at /etc/logrotate.d/netdata</div><div class="line"> This installer allows you to change the installation path.</div><div class="line"> Press Control-C and run the same command with --help for help.</div><div class="line"> Press ENTER to build and install netdata to your system &gt;</div></pre></td></tr></table></figure>
-<p>这些是告诉你，所涉及的文件都安装在哪个目录下，到时配置或修改的时候直接去这些地方找就好了。<br>那么这个时候其实就可以通过提示的URL <a href="http://this.machine.ip:19999/">http://this.machine.ip:19999/</a> 开始监控当前服务器了, 没错，正如访问地址，默认WEB使用的端口为19999.<br>看看netdata监控界面长啥样儿吧~</p></p>
+<p>这些是告诉你，所涉及的文件都安装在哪个目录下，到时配置或修改的时候直接去这些地方找就好了，当然自己也可以仔细看看这些配置文件，了解各个参数的含义。<br>那么这个时候其实就可以通过提示的URL <a href="http://this.machine.ip:19999/">http://this.machine.ip:19999/</a> 开始监控当前服务器了, 没错，正如访问地址，默认WEB使用的端口为19999.<br>看看netdata监控界面长啥样儿吧~</p></p>
             <p class="article-more-link">
                 <a href="/2017/04/27/netdata/#more">查看更多</a>
             </p>
@@ -255,7 +255,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/27/netdata/" data-id="cj206xjet0004phtf7zadr8ve" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/27/netdata/" data-id="cj215mgxk000025tfear7bv9v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -408,7 +408,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj206xjeo0002phtf46nvvmmj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj215mgyq000825tfp4bz8vzq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
