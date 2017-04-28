@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jinsk.vip/"/>
-  <updated>2017-04-28T01:29:53.000Z</updated>
+  <updated>2017-04-28T01:33:31.000Z</updated>
   <id>http://www.jinsk.vip/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://www.jinsk.vip/2017/04/27/netdata/"/>
     <id>http://www.jinsk.vip/2017/04/27/netdata/</id>
     <published>2017-04-27T06:53:07.000Z</published>
-    <updated>2017-04-28T01:29:53.000Z</updated>
+    <updated>2017-04-28T01:33:31.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="netdata简介"><a href="#netdata简介" class="headerlink" title="netdata简介"></a>netdata简介</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;这是个开源项目，地址为(<a href="https://github.com/firehol/netdata/wiki)。" target="_blank" rel="external">https://github.com/firehol/netdata/wiki)。</a><br>&nbsp;&nbsp;&nbsp;&nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？</p>
+    <content type="html"><![CDATA[<h3 id="netdata简介"><a href="#netdata简介" class="headerlink" title="netdata简介"></a>netdata简介</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;这是个开源项目，项目介绍WIKI：<a href="https://github.com/firehol/netdata/wiki" target="_blank" rel="external">https://github.com/firehol/netdata/wiki</a><br>&nbsp;&nbsp;&nbsp;&nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;”netdata is a scalable, distributed, real-time, performance and health monitoring solution for Linux, FreeBSD and MacOS. It is open-source too.”</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;netdata是一个可扩展的，分布式的，实时的，为Linux, FreeBSD和MacOS性能及健康状态监控的解决方案，当然它也是开源的。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;它可以监控服务器的健康运行参数及状态，包括CPU,内存，网络，磁盘等常用的监控指标，以及自己配置扩展监控项，如，redis, tomcat, mysql, nginx, elasticsearch等，是不是已经觉得很不错了？那接下来我说说我是怎么安装的，怎么配置的吧。</p>
@@ -87,7 +87,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;netdata简介&quot;&gt;&lt;a href=&quot;#netdata简介&quot; class=&quot;headerlink&quot; title=&quot;netdata简介&quot;&gt;&lt;/a&gt;netdata简介&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这是个开源项目，地址为(&lt;a href=&quot;https://github.com/firehol/netdata/wiki)。&quot;&gt;https://github.com/firehol/netdata/wiki)。&lt;/a&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？&lt;/p&gt;
+      &lt;h3 id=&quot;netdata简介&quot;&gt;&lt;a href=&quot;#netdata简介&quot; class=&quot;headerlink&quot; title=&quot;netdata简介&quot;&gt;&lt;/a&gt;netdata简介&lt;/h3&gt;&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这是个开源项目，项目介绍WIKI：&lt;a href=&quot;https://github.com/firehol/netdata/wiki&quot;&gt;https://github.com/firehol/netdata/wiki&lt;/a&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;”netdata is a scalable, distributed, real-time, performance and health monitoring solution for Linux, FreeBSD and MacOS. It is open-source too.”&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;netdata是一个可扩展的，分布式的，实时的，为Linux, FreeBSD和MacOS性能及健康状态监控的解决方案，当然它也是开源的。&lt;/p&gt;
 &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;它可以监控服务器的健康运行参数及状态，包括CPU,内存，网络，磁盘等常用的监控指标，以及自己配置扩展监控项，如，redis, tomcat, mysql, nginx, elasticsearch等，是不是已经觉得很不错了？那接下来我说说我是怎么安装的，怎么配置的吧。&lt;/p&gt;
