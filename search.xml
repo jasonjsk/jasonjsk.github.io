@@ -3,6 +3,41 @@
   
     
     <entry>
+      <title><![CDATA[StringBuffer和StringBuilder的区别]]></title>
+      <url>/2017/05/02/java-buffer-build-diff/</url>
+      <content type="html"><![CDATA[<p>这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，所以StringBuffer的性能没有StringBuilder好。<br>我主要从它俩的源码出发来分析它们的区别。</p>
+<ul>
+<li>相同点</li>
+</ul>
+<blockquote>
+<p>1.它俩都继续自抽象类AbstractStringBulder，实现了Appendable, CharSequece,Serializable接口，而且都是final类型，跟String类一样不能再有子类扩展了<br>2.它们的数据结构都是数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * The value is used for character storage.</div><div class="line"> */</div><div class="line"><span class="keyword">char</span>[] value;</div></pre></td></tr></table></figure></p>
+<p>3.它们默认的创建时的长度为16个字符<br>4.append/delete方法的核心操作是通过System.arraycopy实现<br>5.它们都提供四个构造函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(<span class="keyword">int</span> capacity)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(String str)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(CharSequece seq)</span></span>;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>6.每当append方法执行，都会重新扩展其长度，算法为 <strong>当前长度*2+2</strong></p>
+<ul>
+<li>不同点</li>
+</ul>
+<blockquote>
+<p>1.StringBuffer中方法都是synchronized的，保证线程安全<br>2.StringBuffer多一个toStringCache对象，当StringBuffer有toString方法执行时，就会缓存在这里，当内部数据发生变化就会清除缓存内容<br>3.StringBuilder从JDK1.5才开始有，而StringBuffer从JDK1.0就开始有了</p>
+</blockquote>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[服务器监控工具-netdata-搭建]]></title>
       <url>/2017/04/27/netdata/</url>
       <content type="html"><![CDATA[<h3 id="netdata简介"><a href="#netdata简介" class="headerlink" title="netdata简介"></a>netdata简介</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;这是个开源项目，项目介绍WIKI：<a href="https://github.com/firehol/netdata/wiki" target="_blank" rel="external">https://github.com/firehol/netdata/wiki</a><br>&nbsp;&nbsp;&nbsp;&nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？</p>
