@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jinsk.vip/"/>
-  <updated>2017-05-03T00:53:30.000Z</updated>
+  <updated>2017-05-03T01:56:21.000Z</updated>
   <id>http://www.jinsk.vip/</id>
   
   <author>
@@ -20,28 +20,24 @@
     <link href="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/"/>
     <id>http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/</id>
     <published>2017-05-02T02:44:16.000Z</published>
-    <updated>2017-05-03T00:53:30.000Z</updated>
+    <updated>2017-05-03T01:56:21.000Z</updated>
     
-    <content type="html"><![CDATA[<p>这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，所以StringBuffer的性能没有StringBuilder好。<br>我主要从它俩的源码出发来分析它们的区别。</p>
-<ul>
-<li>相同点</li>
-</ul>
-<blockquote>
-<p>1.它俩都继续自抽象类AbstractStringBulder，实现了Appendable, CharSequece,Serializable接口，而且都是final类型，跟String类一样不能再有子类扩展了<br>2.它们的数据结构都是数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * The value is used for character storage.</div><div class="line"> */</div><div class="line"><span class="keyword">char</span>[] value;</div></pre></td></tr></table></figure></p>
-<p>3.它们默认的创建时的长度为16个字符<br>4.append/delete方法的核心操作是通过System.arraycopy实现<br>5.它们都提供四个构造函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(<span class="keyword">int</span> capacity)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(String str)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(CharSequece seq)</span></span>;</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，StringBuilder性能略比StringBuffer好。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;我主要从它俩的源码出发来分析它们的区别。</p>
+<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h5><blockquote>
+<p>1.它俩都继承自抽象类AbstractStringBulder，实现了Appendable, CharSequece,Serializable接口，而且都是final类型，跟String类一样不能再有子类扩展了<br>2.它们的内部数据结构都是字符数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * The value is used for character storage.</div><div class="line"> */</div><div class="line"><span class="keyword">char</span>[] value;</div></pre></td></tr></table></figure></p>
+<p>3.它们默认的创建时的长度为16个字符<br>4.append/delete/insert/replace方法的核心操作都是通过System.arraycopy实现<br>5.它们都提供四个构造函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(<span class="keyword">int</span> capacity)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(String str)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(CharSequece seq)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>6.每当append方法执行前，都会判断数组大小是否足够，如果不够则扩展其长度，算法为 <strong>当前容量长度*2+2</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">    * This method has the same contract as ensureCapacity, but is</div><div class="line">    * never synchronized.</div><div class="line">    */</div><div class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</div><div class="line">       <span class="comment">// overflow-conscious code</span></div><div class="line">       <span class="keyword">if</span> (minimumCapacity - value.length &gt; <span class="number">0</span>)</div><div class="line">           expandCapacity(minimumCapacity);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="comment">/**</span></div><div class="line">    * This implements the expansion semantics of ensureCapacity with no</div><div class="line">    * size check or synchronization.</div><div class="line">    */</div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">expandCapacity</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span> newCapacity = value.length * <span class="number">2</span> + <span class="number">2</span>;</div><div class="line">       <span class="keyword">if</span> (newCapacity - minimumCapacity &lt; <span class="number">0</span>)</div><div class="line">           newCapacity = minimumCapacity;</div><div class="line">       <span class="keyword">if</span> (newCapacity &lt; <span class="number">0</span>) &#123;</div><div class="line">           <span class="keyword">if</span> (minimumCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></div><div class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</div><div class="line">           newCapacity = Integer.MAX_VALUE;</div><div class="line">       &#125;</div><div class="line">       value = Arrays.copyOf(value, newCapacity);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 </blockquote>
-<p>6.每当append方法执行，都会重新扩展其长度，算法为 <strong>当前长度*2+2</strong></p>
-<ul>
-<li>不同点</li>
-</ul>
-<blockquote>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h5><blockquote>
 <p>1.StringBuffer中方法都是synchronized的，保证线程安全<br>2.StringBuffer多一个toStringCache对象，当StringBuffer有toString方法执行时，就会缓存在这里，当内部数据发生变化就会清除缓存内容<br>3.StringBuilder从JDK1.5才开始有，而StringBuffer从JDK1.0就开始有了</p>
 </blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，所以StringBuffer的性能没有StringBuilder好。&lt;br&gt;我主要从它俩的源码出发来分析它们的区别。&lt;
+      &lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，StringBuilder性能略比StringBuffer好。&lt;/p&gt;
     
     </summary>
     
