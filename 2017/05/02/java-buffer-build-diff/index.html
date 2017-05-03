@@ -5,18 +5,18 @@
     <meta name="google-site-verification" content="e0luzZuIWGnVOAn93Q1FimMJ_B97KRnjGOCkS7aeF3M" />
     <meta name="baidu-site-verification" content="yEtYOpFJyV" />
     
-    <title>StringBuffer和StringBuilder的区别 | 金兄</title>
+    <title>StringBuffer和StringBuilder比较 | 金兄</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，StringBuilder性能略比StringBuffer好。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我主要从它俩的源码出发来分析它们的区别。 相同点 1.它俩都继承自抽象类Abstra">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="StringBuffer和StringBuilder的区别">
+<meta property="og:title" content="StringBuffer和StringBuilder比较">
 <meta property="og:url" content="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/index.html">
 <meta property="og:site_name" content="金兄">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，StringBuilder性能略比StringBuffer好。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我主要从它俩的源码出发来分析它们的区别。 相同点 1.它俩都继承自抽象类Abstra">
-<meta property="og:updated_time" content="2017-05-03T01:56:21.000Z">
+<meta property="og:updated_time" content="2017-05-03T07:51:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="StringBuffer和StringBuilder的区别">
+<meta name="twitter:title" content="StringBuffer和StringBuilder比较">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，StringBuilder性能略比StringBuffer好。 &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;我主要从它俩的源码出发来分析它们的区别。 相同点 1.它俩都继承自抽象类Abstra">
     
 
@@ -127,7 +127,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                3
+                4
                 <!-- <span>文章</span> -->
                 <span>文章数</span>
             </div>
@@ -189,7 +189,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            StringBuffer和StringBuilder的区别
+            StringBuffer和StringBuilder比较
         </h1>
     
 
@@ -249,7 +249,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/" data-id="cj28f611i0002bjr5e0azuisc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/" data-id="cj28mpmd20002xctft5iz1v6m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -336,6 +336,11 @@
         </a>
     
     
+        <a href="/2017/05/03/java-linked-array-diff/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">LinkedList和ArrayList的比较</div>
+        </a>
+    
 </nav>
 
 
@@ -367,6 +372,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/05/03/java-linked-array-diff/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
+                            <p class="item-title"><a href="/2017/05/03/java-linked-array-diff/" class="title">LinkedList和ArrayList的比较</a></p>
+                            <p class="item-date"><time datetime="2017-05-03T06:48:40.000Z" itemprop="datePublished">2017-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/05/02/java-buffer-build-diff/" class="thumbnail">
     
     
@@ -378,7 +402,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
-                            <p class="item-title"><a href="/2017/05/02/java-buffer-build-diff/" class="title">StringBuffer和StringBuilder的区别</a></p>
+                            <p class="item-title"><a href="/2017/05/02/java-buffer-build-diff/" class="title">StringBuffer和StringBuilder比较</a></p>
                             <p class="item-date"><time datetime="2017-05-02T02:44:16.000Z" itemprop="datePublished">2017-05-02</time></p>
                         </div>
                     </li>
@@ -431,7 +455,7 @@
         <!-- <h3 class="widget-title">分类</h3> -->
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -441,7 +465,7 @@
         <!-- <h3 class="widget-title">归档</h3> -->
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -450,7 +474,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -459,7 +483,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/Tags/Java/" style="font-size: 10px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
+            <a href="/Tags/Java/" style="font-size: 20px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
         </div>
     </div>
 

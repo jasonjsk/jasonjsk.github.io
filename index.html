@@ -122,7 +122,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                3
+                4
                 <!-- <span>文章</span> -->
                 <span>文章数</span>
             </div>
@@ -177,6 +177,146 @@
 
             
             <section id="main">
+    <article id="post-java-linked-array-diff" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/03/java-linked-array-diff/">LinkedList和ArrayList的比较</a>
+        </h1>
+    
+
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/03/java-linked-array-diff/">
+            <time datetime="2017-05-03T06:48:40.000Z" itemprop="datePublished">2017-05-03</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Categories/technology/">技术</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Tags/Java/">Java</a>
+        <span id="busuanzi_container_page_pv">
+  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
+		</span>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>说明：本文所参照的源码是jdk1.8</p>
+<h5 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h5><p><img src="/images/hierarchy-linkedlist-arraylist.png" alt=""></p>
+<h5 id="List接口提供的方法-28个"><a href="#List接口提供的方法-28个" class="headerlink" title="List接口提供的方法(28个)"></a>List接口提供的方法(28个)</h5><p><img src="/images/methods-in-list.png" alt=""></p></p>
+            <p class="article-more-link">
+                <a href="/2017/05/03/java-linked-array-diff/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/" data-id="cj28mqxkn00004ptf9tovmy6p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/#comments" id="sourceId::2017/05/03/java-linked-array-diff/" class="article-comment-link cy_cmt_count">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+
     <article id="post-java-buffer-build-diff" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -185,7 +325,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/02/java-buffer-build-diff/">StringBuffer和StringBuilder的区别</a>
+            <a class="article-title" href="/2017/05/02/java-buffer-build-diff/">StringBuffer和StringBuilder比较</a>
         </h1>
     
 
@@ -245,7 +385,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/" data-id="cj28f611i0002bjr5e0azuisc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/" data-id="cj28mpmd20002xctft5iz1v6m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -402,7 +542,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/27/netdata/" data-id="cj28f611n0005bjr5tt5mtrll" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/27/netdata/" data-id="cj28mpmct0000xctfypyvqjtq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -555,7 +695,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj28f611a0000bjr5tdtuksef" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj28mpmdb0006xctfvxlh4l7r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -647,6 +787,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/05/03/java-linked-array-diff/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
+                            <p class="item-title"><a href="/2017/05/03/java-linked-array-diff/" class="title">LinkedList和ArrayList的比较</a></p>
+                            <p class="item-date"><time datetime="2017-05-03T06:48:40.000Z" itemprop="datePublished">2017-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/05/02/java-buffer-build-diff/" class="thumbnail">
     
     
@@ -658,7 +817,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
-                            <p class="item-title"><a href="/2017/05/02/java-buffer-build-diff/" class="title">StringBuffer和StringBuilder的区别</a></p>
+                            <p class="item-title"><a href="/2017/05/02/java-buffer-build-diff/" class="title">StringBuffer和StringBuilder比较</a></p>
                             <p class="item-date"><time datetime="2017-05-02T02:44:16.000Z" itemprop="datePublished">2017-05-02</time></p>
                         </div>
                     </li>
@@ -711,7 +870,7 @@
         <!-- <h3 class="widget-title">分类</h3> -->
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -721,7 +880,7 @@
         <!-- <h3 class="widget-title">归档</h3> -->
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -730,7 +889,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -739,7 +898,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/Tags/Java/" style="font-size: 10px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
+            <a href="/Tags/Java/" style="font-size: 20px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
         </div>
     </div>
 

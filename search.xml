@@ -3,7 +3,68 @@
   
     
     <entry>
-      <title><![CDATA[StringBuffer和StringBuilder的区别]]></title>
+      <title><![CDATA[LinkedList和ArrayList的比较]]></title>
+      <url>/2017/05/03/java-linked-array-diff/</url>
+      <content type="html"><![CDATA[<p>说明：本文所参照的源码是jdk1.8</p>
+<h5 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h5><p><img src="/images/hierarchy-linkedlist-arraylist.png" alt=""></p>
+<h5 id="List接口提供的方法-28个"><a href="#List接口提供的方法-28个" class="headerlink" title="List接口提供的方法(28个)"></a>List接口提供的方法(28个)</h5><p><img src="/images/methods-in-list.png" alt=""></p>
+<a id="more"></a>
+<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h5><ul>
+<li>都可被克隆和序列化，且都实现了List接口中定义的方法</li>
+<li>实现了相同的hashcode算法</li>
+<li>实现了相同的toString方法</li>
+</ul>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h5><ul>
+<li>数据结构不同</li>
+</ul>
+<blockquote>
+<p>ArrayList是数组数据结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * The array buffer into which the elements of the ArrayList are stored.</div><div class="line">     * The capacity of the ArrayList is the length of this array buffer. Any</div><div class="line">     * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</div><div class="line">     * will be expanded to DEFAULT_CAPACITY when the first element is added.</div><div class="line">     */</div><div class="line">    <span class="keyword">transient</span> Object[] elementData; <span class="comment">// non-private to simplify nested class access</span></div></pre></td></tr></table></figure></p>
+<p>LinkedList是链表结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">    E item;</div><div class="line">    Node&lt;E&gt; next;</div><div class="line">    Node&lt;E&gt; prev;</div><div class="line"></div><div class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</div><div class="line">        <span class="keyword">this</span>.item = element;</div><div class="line">        <span class="keyword">this</span>.next = next;</div><div class="line">        <span class="keyword">this</span>.prev = prev;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>数据初始内存大小和插入性能不同</li>
+</ul>
+<blockquote>
+<p>ArrayList内部数组扩展大小的算法（当前元素数组长度+它的二分之一，如，当前为30，扩展一次则变为45=30+30/2）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Increases the capacity to ensure that it can hold at least the</div><div class="line"> * number of elements specified by the minimum capacity argument.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> minCapacity the desired minimum capacity</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">    <span class="comment">// overflow-conscious code</span></div><div class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</div><div class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</div><div class="line">        newCapacity = minCapacity;</div><div class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</div><div class="line">        newCapacity = hugeCapacity(minCapacity);</div><div class="line">    <span class="comment">// minCapacity is usually close to size, so this is a win:</span></div><div class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</div><div class="line">&#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>ArrayList初始创建时大小也为0（但可以通过构造方法指定大小），但是当往ArrayList中任意添加元素它的大小则会改变，当元素个数小于10则为10，当元素个数大于10，则按照扩展算法进行扩展；<br>LinkedList初始创建大小为0，因为数据结构是链表所以没有指定大小的构造函数。<br><strong>因此</strong>，插入数据从性能上讲，LinkedList比ArrayList好，因为，LinkedList添加元素只要改变链表的前，后节点关系即可，而ArrayList要先检查数组大小处理扩展逻辑和拷贝数据到新的数组。</p>
+</blockquote>
+<ul>
+<li>访问元素的性能对比</li>
+</ul>
+<blockquote>
+<p>ArrayList通过数组下标访问，速度很快；LinkedList则有可能需要遍历整个链表一半的元素才能找到想要的元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Returns the (non-null) Node at the specified element index.</div><div class="line"> */</div><div class="line"><span class="function">Node&lt;E&gt; <span class="title">node</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">    <span class="comment">// assert isElementIndex(index);</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (index &lt; (size &gt;&gt; <span class="number">1</span>)) &#123;</div><div class="line">        Node&lt;E&gt; x = first;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i++)</div><div class="line">            x = x.next;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        Node&lt;E&gt; x = last;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; index; i--)</div><div class="line">            x = x.prev;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>LinkedList可实现队列</li>
+</ul>
+<blockquote>
+<p>LinkedList实现了Deque接口，提供诸如push,pop,offer等方法，因此，它能很好地实现队列操作；而ArrayList并没有提供这些方法，由于它的数据结构决定了它也不适合作队列。</p>
+</blockquote>
+<h5 id="引申分析Vector"><a href="#引申分析Vector" class="headerlink" title="引申分析Vector"></a>引申分析Vector</h5><ul>
+<li><p>Vector从实现结构上跟ArrayList是一样的，区别在于Vector是线程安全的，ArrayList则不是。</p>
+</li>
+<li><p>Vector可以获取容积大小，而ArrayList获取不了</p>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[StringBuffer和StringBuilder比较]]></title>
       <url>/2017/05/02/java-buffer-build-diff/</url>
       <content type="html"><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，StringBuilder性能略比StringBuffer好。</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;我主要从它俩的源码出发来分析它们的区别。</p>

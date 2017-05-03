@@ -5,14 +5,22 @@
     <meta name="google-site-verification" content="e0luzZuIWGnVOAn93Q1FimMJ_B97KRnjGOCkS7aeF3M" />
     <meta name="baidu-site-verification" content="yEtYOpFJyV" />
     
-    <title>归档: 2017 | 金兄</title>
+    <title>LinkedList和ArrayList的比较 | 金兄</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="金兄">
-<meta property="og:url" content="http://www.jinsk.vip/archives/2017/index.html">
+    <meta name="description" content="说明：本文所参照的源码是jdk1.8 继承关系 List接口提供的方法(28个)">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinkedList和ArrayList的比较">
+<meta property="og:url" content="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/index.html">
 <meta property="og:site_name" content="金兄">
+<meta property="og:description" content="说明：本文所参照的源码是jdk1.8 继承关系 List接口提供的方法(28个)">
+<meta property="og:image" content="http://www.jinsk.vip/images/hierarchy-linkedlist-arraylist.png">
+<meta property="og:image" content="http://www.jinsk.vip/images/methods-in-list.png">
+<meta property="og:updated_time" content="2017-05-03T10:29:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="金兄">
+<meta name="twitter:title" content="LinkedList和ArrayList的比较">
+<meta name="twitter:description" content="说明：本文所参照的源码是jdk1.8 继承关系 List接口提供的方法(28个)">
+<meta name="twitter:image" content="http://www.jinsk.vip/images/hierarchy-linkedlist-arraylist.png">
     
 
     
@@ -176,26 +184,22 @@
 </aside>
 
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title">2017</h1>
-            </div>
+            <section id="main"><article id="post-java-linked-array-diff" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/05/03/java-linked-array-diff/">LinkedList和ArrayList的比较</a>
+        <h1 class="article-title" itemprop="name">
+            LinkedList和ArrayList的比较
         </h1>
     
 
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
         <a href="/2017/05/03/java-linked-array-diff/">
@@ -204,13 +208,13 @@
     </div>
 
 
-                    
+                        
     <div class="article-category">
     	<i class="fa fa-folder"></i>
         <a class="article-category-link" href="/Categories/technology/">技术</a>
     </div>
 
-                    
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link" href="/Tags/Java/">Java</a>
@@ -219,131 +223,169 @@
 		</span>
     </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                    </div>
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/05/02/java-buffer-build-diff/">StringBuffer和StringBuilder比较</a>
-        </h1>
-    
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>说明：本文所参照的源码是jdk1.8</p>
+<h5 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h5><p><img src="/images/hierarchy-linkedlist-arraylist.png" alt=""></p>
+<h5 id="List接口提供的方法-28个"><a href="#List接口提供的方法-28个" class="headerlink" title="List接口提供的方法(28个)"></a>List接口提供的方法(28个)</h5><p><img src="/images/methods-in-list.png" alt=""></p>
+<a id="more"></a>
+<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h5><ul>
+<li>都可被克隆和序列化，且都实现了List接口中定义的方法</li>
+<li>实现了相同的hashcode算法</li>
+<li>实现了相同的toString方法</li>
+</ul>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h5><ul>
+<li>数据结构不同</li>
+</ul>
+<blockquote>
+<p>ArrayList是数组数据结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">     * The array buffer into which the elements of the ArrayList are stored.</div><div class="line">     * The capacity of the ArrayList is the length of this array buffer. Any</div><div class="line">     * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</div><div class="line">     * will be expanded to DEFAULT_CAPACITY when the first element is added.</div><div class="line">     */</div><div class="line">    <span class="keyword">transient</span> Object[] elementData; <span class="comment">// non-private to simplify nested class access</span></div></pre></td></tr></table></figure></p>
+<p>LinkedList是链表结构<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">    E item;</div><div class="line">    Node&lt;E&gt; next;</div><div class="line">    Node&lt;E&gt; prev;</div><div class="line"></div><div class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</div><div class="line">        <span class="keyword">this</span>.item = element;</div><div class="line">        <span class="keyword">this</span>.next = next;</div><div class="line">        <span class="keyword">this</span>.prev = prev;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>数据初始内存大小和插入性能不同</li>
+</ul>
+<blockquote>
+<p>ArrayList内部数组扩展大小的算法（当前元素数组长度+它的二分之一，如，当前为30，扩展一次则变为45=30+30/2）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Increases the capacity to ensure that it can hold at least the</div><div class="line"> * number of elements specified by the minimum capacity argument.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> minCapacity the desired minimum capacity</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</div><div class="line">    <span class="comment">// overflow-conscious code</span></div><div class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</div><div class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</div><div class="line">        newCapacity = minCapacity;</div><div class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</div><div class="line">        newCapacity = hugeCapacity(minCapacity);</div><div class="line">    <span class="comment">// minCapacity is usually close to size, so this is a win:</span></div><div class="line">    elementData = Arrays.copyOf(elementData, newCapacity);</div><div class="line">&#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>ArrayList初始创建时大小也为0（但可以通过构造方法指定大小），但是当往ArrayList中任意添加元素它的大小则会改变，当元素个数小于10则为10，当元素个数大于10，则按照扩展算法进行扩展；<br>LinkedList初始创建大小为0，因为数据结构是链表所以没有指定大小的构造函数。<br><strong>因此</strong>，插入数据从性能上讲，LinkedList比ArrayList好，因为，LinkedList添加元素只要改变链表的前，后节点关系即可，而ArrayList要先检查数组大小处理扩展逻辑和拷贝数据到新的数组。</p>
+</blockquote>
+<ul>
+<li>访问元素的性能对比</li>
+</ul>
+<blockquote>
+<p>ArrayList通过数组下标访问，速度很快；LinkedList则有可能需要遍历整个链表一半的元素才能找到想要的元素<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Returns the (non-null) Node at the specified element index.</div><div class="line"> */</div><div class="line"><span class="function">Node&lt;E&gt; <span class="title">node</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">    <span class="comment">// assert isElementIndex(index);</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (index &lt; (size &gt;&gt; <span class="number">1</span>)) &#123;</div><div class="line">        Node&lt;E&gt; x = first;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; index; i++)</div><div class="line">            x = x.next;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        Node&lt;E&gt; x = last;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = size - <span class="number">1</span>; i &gt; index; i--)</div><div class="line">            x = x.prev;</div><div class="line">        <span class="keyword">return</span> x;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>LinkedList可实现队列</li>
+</ul>
+<blockquote>
+<p>LinkedList实现了Deque接口，提供诸如push,pop,offer等方法，因此，它能很好地实现队列操作；而ArrayList并没有提供这些方法，由于它的数据结构决定了它也不适合作队列。</p>
+</blockquote>
+<h5 id="引申分析Vector"><a href="#引申分析Vector" class="headerlink" title="引申分析Vector"></a>引申分析Vector</h5><ul>
+<li><p>Vector从实现结构上跟ArrayList是一样的，区别在于Vector是线程安全的，ArrayList则不是。</p>
+</li>
+<li><p>Vector可以获取容积大小，而ArrayList获取不了</p>
+</li>
+</ul>
 
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/02/java-buffer-build-diff/">
-            <time datetime="2017-05-02T02:44:16.000Z" itemprop="datePublished">2017-05-02</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/Categories/technology/">技术</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Tags/Java/">Java</a>
-        <span id="busuanzi_container_page_pv">
-  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
-		</span>
-    </div>
-
-                </div>
-            </div>
+        
         </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/04/27/netdata/">服务器监控工具-netdata-搭建</a>
-        </h1>
-    
+        <footer class="article-footer">
+            <div class="share-container">
 
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/27/netdata/">
-            <time datetime="2017-04-27T06:53:07.000Z" itemprop="datePublished">2017-04-27</time>
-        </a>
-    </div>
 
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/Categories/technology/">技术</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Tags/setup/">环境搭建</a>, <a class="tag-link" href="/Tags/devops/">运维</a>
-        <span id="busuanzi_container_page_pv">
-  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
-		</span>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/04/21/first/">我的博客小窝上线了</a>
-        </h1>
-    
-
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/21/first/">
-            <time datetime="2017-04-21T01:26:24.000Z" itemprop="datePublished">2017-04-21</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/Categories/technology/">技术</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Tags/setup/">环境搭建</a>, <a class="tag-link" href="/Tags/diary/">随笔日志</a>
-        <span id="busuanzi_container_page_pv">
-  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
-		</span>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
 </div>
+
+    <a data-url="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/" data-id="cj28mqxkn00004ptf9tovmy6p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/#comments" id="sourceId::2017/05/03/java-linked-array-diff/" class="article-comment-link cy_cmt_count">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/05/02/java-buffer-build-diff/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    StringBuffer和StringBuilder比较
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="SOHUCS" sid="2017/05/03/java-linked-array-diff/"></div>
+
+    
+    </section>
+
+
 </section>
             
                 <aside id="sidebar">
