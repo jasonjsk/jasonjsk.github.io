@@ -16,7 +16,7 @@
 <meta property="og:description" content="说明：本文所参照的源码是jdk1.8 继承关系 List接口提供的方法(28个)">
 <meta property="og:image" content="http://www.jinsk.vip/images/hierarchy-linkedlist-arraylist.png">
 <meta property="og:image" content="http://www.jinsk.vip/images/methods-in-list.png">
-<meta property="og:updated_time" content="2017-05-03T10:29:39.000Z">
+<meta property="og:updated_time" content="2017-05-05T23:36:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LinkedList和ArrayList的比较">
 <meta name="twitter:description" content="说明：本文所参照的源码是jdk1.8 继承关系 List接口提供的方法(28个)">
@@ -235,12 +235,14 @@
 <h5 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h5><p><img src="/images/hierarchy-linkedlist-arraylist.png" alt=""></p>
 <h5 id="List接口提供的方法-28个"><a href="#List接口提供的方法-28个" class="headerlink" title="List接口提供的方法(28个)"></a>List接口提供的方法(28个)</h5><p><img src="/images/methods-in-list.png" alt=""></p>
 <a id="more"></a>
-<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h5><ul>
+<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h5><hr>
+<ul>
 <li>都可被克隆和序列化，且都实现了List接口中定义的方法</li>
 <li>实现了相同的hashcode算法</li>
 <li>实现了相同的toString方法</li>
 </ul>
-<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h5><ul>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h5><hr>
+<ul>
 <li>数据结构不同</li>
 </ul>
 <blockquote>
@@ -272,6 +274,10 @@
 <li><p>Vector可以获取容积大小，而ArrayList获取不了</p>
 </li>
 </ul>
+<h5 id="引申分析Set"><a href="#引申分析Set" class="headerlink" title="引申分析Set"></a>引申分析Set</h5><ul>
+<li>HashSet为数据结构为HashMap,因此，数据元素不会重复，也没有顺序</li>
+<li>LinkedHashSet的数据结构则为LinkedHashMap, 因此，数据元素依然不会重复，但双向链表就可以实现有序了</li>
+</ul>
 
         
         </div>
@@ -282,7 +288,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/" data-id="cj28mqxkn00004ptf9tovmy6p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/" data-id="cj29pie2l0006y7tfdbxhuehn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -524,15 +530,15 @@
             <ul>
                 
                     <li>
-                        <a href="http://www.infoq.com/cn/">InfoQ</a>
+                        <a href="http://www.infoq.com/cn/" target="_blank">InfoQ</a>
                     </li>
                 
                     <li>
-                        <a href="http://www.oschina.net/">开源中国</a>
+                        <a href="http://www.oschina.net/" target="_blank">开源中国</a>
                     </li>
                 
                     <li>
-                        <a href="http://hexo.io">Hexo</a>
+                        <a href="http://hexo.io" target="_blank">Hexo</a>
                     </li>
                 
             </ul>
