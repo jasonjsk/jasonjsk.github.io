@@ -5,19 +5,21 @@
     <meta name="google-site-verification" content="e0luzZuIWGnVOAn93Q1FimMJ_B97KRnjGOCkS7aeF3M" />
     <meta name="baidu-site-verification" content="yEtYOpFJyV" />
     
-    <title>我的博客小窝上线了 | 金兄</title>
+    <title>Map的内部结构 | 金兄</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="本窝目的作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来。随便回顾一下本博所搭建运用的技术，因此也是我需要学习的新知识，如：markdown语法， hexo框架，github管理及git工具。 博客搭建 Github 注册帐号创建项目   本地搭建hexo环境 安装Node.js安装hexo创建博客项目配置g">
-<meta name="keywords" content="环境搭建,随笔日志">
+    <meta name="description" content="常用的Map实现类常见的Map实现类大概简单地列举几个。  java.util.HashMap java.util.LinkedHashMap java.util.concurrent.ConcurrentHashMap java.util.concurrent.ConcurrentSkipListMap java.util.IdentityHashMap java.util.TreeMap ja">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的博客小窝上线了">
-<meta property="og:url" content="http://www.jinsk.vip/2017/04/21/first/index.html">
+<meta property="og:title" content="Map的内部结构">
+<meta property="og:url" content="http://www.jinsk.vip/2017/05/06/java-map/index.html">
 <meta property="og:site_name" content="金兄">
-<meta property="og:description" content="本窝目的作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来。随便回顾一下本博所搭建运用的技术，因此也是我需要学习的新知识，如：markdown语法， hexo框架，github管理及git工具。 博客搭建 Github 注册帐号创建项目   本地搭建hexo环境 安装Node.js安装hexo创建博客项目配置g">
-<meta property="og:updated_time" content="2017-04-27T09:51:32.000Z">
+<meta property="og:description" content="常用的Map实现类常见的Map实现类大概简单地列举几个。  java.util.HashMap java.util.LinkedHashMap java.util.concurrent.ConcurrentHashMap java.util.concurrent.ConcurrentSkipListMap java.util.IdentityHashMap java.util.TreeMap ja">
+<meta property="og:image" content="http://www.jinsk.vip/images/map-structure.jpg">
+<meta property="og:updated_time" content="2017-05-12T01:09:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的博客小窝上线了">
-<meta name="twitter:description" content="本窝目的作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来。随便回顾一下本博所搭建运用的技术，因此也是我需要学习的新知识，如：markdown语法， hexo框架，github管理及git工具。 博客搭建 Github 注册帐号创建项目   本地搭建hexo环境 安装Node.js安装hexo创建博客项目配置g">
+<meta name="twitter:title" content="Map的内部结构">
+<meta name="twitter:description" content="常用的Map实现类常见的Map实现类大概简单地列举几个。  java.util.HashMap java.util.LinkedHashMap java.util.concurrent.ConcurrentHashMap java.util.concurrent.ConcurrentSkipListMap java.util.IdentityHashMap java.util.TreeMap ja">
+<meta name="twitter:image" content="http://www.jinsk.vip/images/map-structure.jpg">
     
 
     
@@ -181,7 +183,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-java-map" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -189,7 +191,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            我的博客小窝上线了
+            Map的内部结构
         </h1>
     
 
@@ -199,8 +201,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/04/21/first/">
-            <time datetime="2017-04-21T01:26:24.000Z" itemprop="datePublished">2017-04-21</time>
+        <a href="/2017/05/06/java-map/">
+            <time datetime="2017-05-06T01:34:31.000Z" itemprop="datePublished">2017-05-06</time>
         </a>
     </div>
 
@@ -214,7 +216,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Tags/setup/">环境搭建</a>, <a class="tag-link" href="/Tags/diary/">随笔日志</a>
+        <a class="tag-link" href="/Tags/Java/">Java</a>
         <span id="busuanzi_container_page_pv">
   			本文已阅读<span id="busuanzi_value_page_pv"></span>次
 		</span>
@@ -228,46 +230,31 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h3 id="本窝目的"><a href="#本窝目的" class="headerlink" title="本窝目的"></a>本窝目的</h3><p>作为一名程序猿，应该要有自己的小窝来总结、积累、沉淀自己的东西，充实自己，因此，趁在农忙过后的这段时间搭好环境，转移曾经的笔记到这个小窝来。<br>随便回顾一下本博所搭建运用的技术，因此也是我需要学习的新知识，如：markdown语法， hexo框架，github管理及git工具。</p>
-<h3 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h3><ul>
-<li>Github<blockquote>
-<p><a href="https://github.com/" target="_blank" rel="external">注册帐号</a><br>创建项目</p>
-</blockquote>
-</li>
-<li>本地搭建hexo环境<blockquote>
-<p>安装Node.js<br>安装hexo<br>创建博客项目<br>配置github帐号<br>安装插件<br><a href="https://hexo.io/themes/" target="_blank" rel="external">选择主题</a><br>下载并配置主题（本人选择了<a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="external">icarus</a>）</p>
-</blockquote>
-</li>
-<li>安装Markdown环境<blockquote>
-<p>安装SublimeText3<br>安装Markdown插件</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h3><h6 id="上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。"><a href="#上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。" class="headerlink" title="上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。"></a>上面各个步骤在网上都有很多资料，对照着配置都不会有什么问题，但我简单把我遇到的问题并且在网上并没有找到太多资料的步骤描述一下，方便遇到和我一样问题的朋友可以借鉴。</h6><a id="more"></a>
+            <h3 id="常用的Map实现类"><a href="#常用的Map实现类" class="headerlink" title="常用的Map实现类"></a>常用的Map实现类</h3><p>常见的Map实现类大概简单地列举几个。</p>
 <ul>
-<li><p>主题汉化</p>
-<blockquote>
-<p>1.下载就略过了，git clone 对应的主题到本地themes目录下<br>2.我一开始还对主题的各个页面进行了汉化修改，但实际上并不需要，只要把主配置文件_config.yml中语言项配置为zh-CN即可，即(language: zh-CN)</p>
-</blockquote>
-</li>
-<li><p>自定义域名配置</p>
-<blockquote>
-<p>如果你也和我一样，专门申请了一个专用的域名，那么会在github中配置costom domain,但是每次重新发布之后，又需要重新设置<br><strong>解决办法</strong>：在项目source目录中创建CNAME文件，在里面写上自己的域名即可，再重新发即不需要重新设置了</p>
-</blockquote>
-</li>
-<li><p>评论支持功能配置</p>
-<blockquote>
-<p>1.社会化评论系统选择，我首先参考了网上很多朋友使用的友言，我开始配置了，发现发布github上之后，提交评论时提示参数不正确，无法提交评论内容，于是，转而尝试多说，但是遗憾多说将在6.1日关停评论服务，所以，后来我选择了”<a href="http://changyan.kuaizhan.com/" target="_blank" rel="external">搜狐畅言</a>“<br>2.对于畅言来说，配置还是挺简单的，注册好帐号就能找到appid和conf两个东西，配置上就OK了<br>3.配置主题中_config.yml-&gt;comment: changyan: 两项，并不需要网上所说修改artcle.ejs了，因为，新版的主题直接在最下边处理好了,在index.ejs中针对支持的评论系统做好了处理</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%- partial(&apos;comment/index&apos;) %&gt;</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>分类和标签通过菜单进入无内容显示</p>
-<blockquote>
-<p><strong>解决办法</strong>：把主题下面边的categories里的index.md复制到项目的source里categories目录里的index.md进行替换，其实也就是参考主题里的写法就好了；标签的也一样。</p>
-</blockquote>
-</li>
+<li>java.util.HashMap</li>
+<li>java.util.LinkedHashMap</li>
+<li>java.util.concurrent.ConcurrentHashMap</li>
+<li>java.util.concurrent.ConcurrentSkipListMap</li>
+<li>java.util.IdentityHashMap</li>
+<li>java.util.TreeMap</li>
+<li>java.util.Hashtable</li>
+<li>org.springframework.util.ConcurrentReferenceHashMap</li>
+<li>org.springframework.core.annotation.AnnotationAttributes extends LinkedHashMap</li>
+<li>org.springframework.ui.ModelMap extends LinkedHashMap</li>
+<li>com.mysql.jdbc.util.LRUCache extends LinkedHashMap</li>
 </ul>
-<h3 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h3><p>希望大家多多指教，多多交流，左边二维码是我的微信，欢迎加我好友进行交流，相互学习。</p>
+<p><img src="/images/map-structure.jpg" alt=""></p>
+<h3 id="各种Map的数据结构，特点"><a href="#各种Map的数据结构，特点" class="headerlink" title="各种Map的数据结构，特点"></a>各种Map的数据结构，特点</h3><ul>
+<li>HashMap基于单向链表数组存储数据，默认容积16，但是在数组上并没有按照数组下标顺序存储，而是按Key的哈希值计算在数组中的位置。</li>
+<li>LinkedHashMap基于双向链表存储数据。</li>
+<li>IdentityHashMap并不是常用的类，但也还是说一下，它基于Object数组存储，默认容积32，实例化时容积会在默认容积*2(64)，因为Key进行哈希后指定坐标位置存储，然后紧接着下个下标元素会存储对应的value；扩容算法为乘以2；另一个特点，它key在取哈希的时候是用的Object的原始算法，因此，只要KEY是不同的对象，内存地址不相同就可以存入两个相同内容的KEY,也就是Key可以重复。</li>
+<li>TreeMap基于二叉树结构。左孩子节点存放比根节点小的，右孩子节点存放比根节点大的数据。</li>
+</ul>
+<h3 id="有趣的设计"><a href="#有趣的设计" class="headerlink" title="有趣的设计"></a>有趣的设计</h3><ul>
+<li>接口中又定义了接口， Map.Entry</li>
+</ul>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>由于是尝试分析，非常地浅显，欢迎各路大神对文中错误提出指正，对不足之处不吝赐教。</p>
 
         
         </div>
@@ -278,7 +265,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj2l59cpy0000hxr52ruu8p7p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/06/java-map/" data-id="cj2l59cqk0008hxr5lfqxf9wf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -346,7 +333,7 @@
 
             
     
-        <a href="http://www.jinsk.vip/2017/04/21/first/#comments" id="sourceId::2017/04/21/first/" class="article-comment-link cy_cmt_count">评论</a>
+        <a href="http://www.jinsk.vip/2017/05/06/java-map/#comments" id="sourceId::2017/05/06/java-map/" class="article-comment-link cy_cmt_count">评论</a>
     
 
         </footer>
@@ -355,11 +342,15 @@
         
 <nav id="article-nav">
     
-    
-        <a href="/2017/04/27/netdata/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">服务器监控工具-netdata-搭建</div>
+        <a href="/2017/05/03/java-linked-array-diff/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    LinkedList和ArrayList的比较
+                
+            </div>
         </a>
+    
     
 </nav>
 
@@ -372,7 +363,7 @@
     <section id="comments">
     
         
-    <div id="SOHUCS" sid="2017/04/21/first/"></div>
+    <div id="SOHUCS" sid="2017/05/06/java-map/"></div>
 
     
     </section>

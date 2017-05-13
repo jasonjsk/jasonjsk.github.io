@@ -3,6 +3,51 @@
   
     
     <entry>
+      <title><![CDATA[Map的内部结构]]></title>
+      <url>/2017/05/06/java-map/</url>
+      <content type="html"><![CDATA[<h3 id="常用的Map实现类"><a href="#常用的Map实现类" class="headerlink" title="常用的Map实现类"></a>常用的Map实现类</h3><p>常见的Map实现类大概简单地列举几个。</p>
+<ul>
+<li>java.util.HashMap</li>
+<li>java.util.LinkedHashMap</li>
+<li>java.util.concurrent.ConcurrentHashMap</li>
+<li>java.util.concurrent.ConcurrentSkipListMap</li>
+<li>java.util.IdentityHashMap</li>
+<li>java.util.TreeMap</li>
+<li>java.util.Hashtable</li>
+<li>org.springframework.util.ConcurrentReferenceHashMap</li>
+<li>org.springframework.core.annotation.AnnotationAttributes extends LinkedHashMap</li>
+<li>org.springframework.ui.ModelMap extends LinkedHashMap</li>
+<li>com.mysql.jdbc.util.LRUCache extends LinkedHashMap</li>
+</ul>
+<p><img src="/images/map-structure.jpg" alt=""></p>
+<h3 id="各种Map的数据结构，特点"><a href="#各种Map的数据结构，特点" class="headerlink" title="各种Map的数据结构，特点"></a>各种Map的数据结构，特点</h3><ul>
+<li>HashMap基于单向链表数组存储数据，默认容积16，但是在数组上并没有按照数组下标顺序存储，而是按Key的哈希值计算在数组中的位置。</li>
+<li>LinkedHashMap基于双向链表存储数据。</li>
+<li>IdentityHashMap并不是常用的类，但也还是说一下，它基于Object数组存储，默认容积32，实例化时容积会在默认容积*2(64)，因为Key进行哈希后指定坐标位置存储，然后紧接着下个下标元素会存储对应的value；扩容算法为乘以2；另一个特点，它key在取哈希的时候是用的Object的原始算法，因此，只要KEY是不同的对象，内存地址不相同就可以存入两个相同内容的KEY,也就是Key可以重复。</li>
+<li>TreeMap基于二叉树结构。左孩子节点存放比根节点小的，右孩子节点存放比根节点大的数据。</li>
+</ul>
+<h3 id="有趣的设计"><a href="#有趣的设计" class="headerlink" title="有趣的设计"></a>有趣的设计</h3><ul>
+<li>接口中又定义了接口， Map.Entry</li>
+</ul>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>由于是尝试分析，非常地浅显，欢迎各路大神对文中错误提出指正，对不足之处不吝赐教。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[LinkedList和ArrayList的比较]]></title>
       <url>/2017/05/03/java-linked-array-diff/</url>
       <content type="html"><![CDATA[<p>说明：本文所参照的源码是jdk1.8</p>
