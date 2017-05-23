@@ -122,12 +122,12 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                6
+                7
                 <!-- <span>文章</span> -->
                 <span>文章数</span>
             </div>
             <div class="article-info-block">
-                4
+                5
                 <!-- <span>标签</span> -->
                 <span>标签数</span>
             </div>
@@ -177,6 +177,163 @@
 
             
             <section id="main">
+    <article id="post-netdata" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/04/27/netdata/">服务器监控工具-netdata-搭建</a>
+        </h1>
+    
+
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/27/netdata/">
+            <time datetime="2017-04-27T06:53:07.000Z" itemprop="datePublished">2017-04-27</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Categories/technology/">技术</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Tags/setup/">环境搭建</a>, <a class="tag-link" href="/Tags/devops/">运维</a>
+        <span id="busuanzi_container_page_pv">
+  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
+		</span>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><h3 id="netdata简介"><a href="#netdata简介" class="headerlink" title="netdata简介"></a>netdata简介</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;这是个开源项目，项目介绍WIKI：<a href="https://github.com/firehol/netdata/wiki">https://github.com/firehol/netdata/wiki</a><br>&nbsp;&nbsp;&nbsp;&nbsp;我已经使用这套监控系统一段时间了，感觉很不错，监控指标丰富，界面美观，能监控集群下的所有节点服务器，它是个什么东东呢？</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;”netdata is a scalable, distributed, real-time, performance and health monitoring solution for Linux, FreeBSD and MacOS. It is open-source too.”</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;netdata是一个可扩展的，分布式的，实时的，为Linux, FreeBSD和MacOS性能及健康状态监控的解决方案，当然它也是开源的。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;它可以监控服务器的健康运行参数及状态，包括CPU,内存，网络，磁盘等常用的监控指标，以及自己配置扩展监控项，如，redis, tomcat, mysql, nginx, elasticsearch等，是不是已经觉得很不错了？那接下来我说说我是怎么安装的，怎么配置的吧。</p>
+<h3 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h3><ul>
+<li><p>下载</p>
+<blockquote>
+<p>由于开源项目，直接克隆一套源代码到YOUR_SERVER/path/to/</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/firehol/netdata.git</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>安装</p>
+<blockquote>
+<p>1.安装编译所需要的包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install zlib-devel libuuid-devel libmnl-devel gcc make git autoconf autogen automake pkgconfig</div></pre></td></tr></table></figure>
+<p>2.运行自带的安装启动脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./netdata-installer.sh</div></pre></td></tr></table></figure>
+<p>完事你会看到如下提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">It will be installed at these locations:</div><div class="line">  - the daemon     at /usr/sbin/netdata</div><div class="line">  - config files   in /etc/netdata</div><div class="line">  - web files      in /usr/share/netdata</div><div class="line">  - plugins        in /usr/libexec/netdata</div><div class="line">  - cache files    in /var/cache/netdata</div><div class="line">  - db files       in /var/lib/netdata</div><div class="line">  - log files      in /var/log/netdata</div><div class="line">  - pid file       at /var/run/netdata.pid</div><div class="line">  - logrotate file at /etc/logrotate.d/netdata</div><div class="line"> This installer allows you to change the installation path.</div><div class="line"> Press Control-C and run the same command with --help for help.</div><div class="line"> Press ENTER to build and install netdata to your system &gt;</div></pre></td></tr></table></figure>
+<p>这些是告诉你，所涉及的文件都安装在哪个目录下，到时配置或修改的时候直接去这些地方找就好了，当然自己也可以仔细看看这些配置文件，了解各个参数的含义。<br>那么这个时候其实就可以通过提示的URL <a href="http://this.machine.ip:19999/">http://this.machine.ip:19999/</a> 开始监控当前服务器了, 没错，正如访问地址，默认WEB使用的端口为19999.<br>看看netdata监控界面长啥样儿吧~</p></p>
+            <p class="article-more-link">
+                <a href="/2017/04/27/netdata/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.jinsk.vip/2017/04/27/netdata/" data-id="cj31g1bvn0009r7tf1jdvif0r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.jinsk.vip/2017/04/27/netdata/#comments" id="sourceId::2017/04/27/netdata/" class="article-comment-link cy_cmt_count">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+
     <article id="post-first" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -251,7 +408,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj2yjyctk000020tf3z4wbzeb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj31g1bv50003r7tfa9phemmg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -347,6 +504,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/05/23/share-experience-01/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/Categories/essay/">随笔</a></p>
+                            <p class="item-title"><a href="/2017/05/23/share-experience-01/" class="title">技术大牛说自己的成长经历[转载]</a></p>
+                            <p class="item-date"><time datetime="2017-05-23T10:31:51.000Z" itemprop="datePublished">2017-05-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/05/19/rsync-usage/" class="thumbnail">
     
     
@@ -420,25 +596,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/04/27/netdata/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
-                            <p class="item-title"><a href="/2017/04/27/netdata/" class="title">服务器监控工具-netdata-搭建</a></p>
-                            <p class="item-date"><time datetime="2017-04-27T06:53:07.000Z" itemprop="datePublished">2017-04-27</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -449,7 +606,7 @@
         <!-- <h3 class="widget-title">分类</h3> -->
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">6</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/Categories/essay/">随笔</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -459,7 +616,7 @@
         <!-- <h3 class="widget-title">归档</h3> -->
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -468,7 +625,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/experience/">经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -477,7 +634,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/Tags/Java/" style="font-size: 20px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
+            <a href="/Tags/Java/" style="font-size: 20px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/experience/" style="font-size: 10px;">经验总结</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
         </div>
     </div>
 
