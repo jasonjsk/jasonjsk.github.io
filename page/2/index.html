@@ -122,7 +122,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                7
+                8
                 <!-- <span>文章</span> -->
                 <span>文章数</span>
             </div>
@@ -177,6 +177,153 @@
 
             
             <section id="main">
+    <article id="post-java-buffer-build-diff" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/02/java-buffer-build-diff/">StringBuffer和StringBuilder比较</a>
+        </h1>
+    
+
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/02/java-buffer-build-diff/">
+            <time datetime="2017-05-02T02:44:16.000Z" itemprop="datePublished">2017-05-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Categories/technology/">技术</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Tags/Java/">Java</a>
+        <span id="busuanzi_container_page_pv">
+  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
+		</span>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;这个问题其实是很多面试官喜欢问的问题，大多数童鞋都知道它们的主要区别是StringBuffer是线程安全的，StringBuilder非线程安全，因为如此，StringBuilder性能略比StringBuffer好。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;我主要从它俩的源码出发来分析它们的区别。</p>
+<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h5><blockquote>
+<p>1.它俩都继承自抽象类AbstractStringBulder，实现了Appendable, CharSequece,Serializable接口，而且都是final类型，跟String类一样不能再有子类扩展了<br>2.它们的内部数据结构都是字符数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * The value is used for character storage.</div><div class="line"> */</div><div class="line"><span class="keyword">char</span>[] value;</div></pre></td></tr></table></figure></p>
+<p>3.它们默认的创建时的长度为16个字符<br>4.append/delete/insert/replace方法的核心操作都是通过System.arraycopy实现<br>5.它们都提供四个构造函数<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(<span class="keyword">int</span> capacity)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(String str)</span></span>;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">StringBxxx</span><span class="params">(CharSequece seq)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>6.每当append方法执行前，都会判断数组大小是否足够，如果不够则扩展其长度，算法为 <strong>当前容量长度*2+2</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">    * This method has the same contract as ensureCapacity, but is</div><div class="line">    * never synchronized.</div><div class="line">    */</div><div class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ensureCapacityInternal</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</div><div class="line">       <span class="comment">// overflow-conscious code</span></div><div class="line">       <span class="keyword">if</span> (minimumCapacity - value.length &gt; <span class="number">0</span>)</div><div class="line">           expandCapacity(minimumCapacity);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="comment">/**</span></div><div class="line">    * This implements the expansion semantics of ensureCapacity with no</div><div class="line">    * size check or synchronization.</div><div class="line">    */</div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">expandCapacity</span><span class="params">(<span class="keyword">int</span> minimumCapacity)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span> newCapacity = value.length * <span class="number">2</span> + <span class="number">2</span>;</div><div class="line">       <span class="keyword">if</span> (newCapacity - minimumCapacity &lt; <span class="number">0</span>)</div><div class="line">           newCapacity = minimumCapacity;</div><div class="line">       <span class="keyword">if</span> (newCapacity &lt; <span class="number">0</span>) &#123;</div><div class="line">           <span class="keyword">if</span> (minimumCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></div><div class="line">               <span class="keyword">throw</span> <span class="keyword">new</span> OutOfMemoryError();</div><div class="line">           newCapacity = Integer.MAX_VALUE;</div><div class="line">       &#125;</div><div class="line">       value = Arrays.copyOf(value, newCapacity);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h5><blockquote>
+<p>1.StringBuffer中方法都是synchronized的，保证线程安全<br>2.StringBuffer多一个toStringCache对象，当StringBuffer有toString方法执行时，就会缓存在这里，当内部数据发生变化就会清除缓存内容<br>3.StringBuilder从JDK1.5才开始有，而StringBuffer从JDK1.0就开始有了</p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/" data-id="cj32c2vlj00016hr5xsnc20ol" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.jinsk.vip/2017/05/02/java-buffer-build-diff/#comments" id="sourceId::2017/05/02/java-buffer-build-diff/" class="article-comment-link cy_cmt_count">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+
     <article id="post-netdata" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -255,7 +402,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/27/netdata/" data-id="cj31g1bvn0009r7tf1jdvif0r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/27/netdata/" data-id="cj32c2vmq000s6hr5em6macss" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -408,7 +555,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj31g1bv50003r7tfa9phemmg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/04/21/first/" data-id="cj32c2vlo00046hr58jisbgx0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -504,6 +651,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/05/24/elksetup/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
+                            <p class="item-title"><a href="/2017/05/24/elksetup/" class="title">elk安装过程</a></p>
+                            <p class="item-date"><time datetime="2017-05-24T01:25:24.000Z" itemprop="datePublished">2017-05-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/05/23/share-experience-01/" class="thumbnail">
     
     
@@ -577,25 +743,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/05/02/java-buffer-build-diff/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
-                            <p class="item-title"><a href="/2017/05/02/java-buffer-build-diff/" class="title">StringBuffer和StringBuilder比较</a></p>
-                            <p class="item-date"><time datetime="2017-05-02T02:44:16.000Z" itemprop="datePublished">2017-05-02</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -606,7 +753,7 @@
         <!-- <h3 class="widget-title">分类</h3> -->
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/Categories/essay/">随笔</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/Categories/essay/">随笔</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -616,7 +763,7 @@
         <!-- <h3 class="widget-title">归档</h3> -->
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -625,7 +772,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/experience/">经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/experience/">经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -634,7 +781,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/Tags/Java/" style="font-size: 20px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/experience/" style="font-size: 10px;">经验总结</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
+            <a href="/Tags/Java/" style="font-size: 15px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/experience/" style="font-size: 10px;">经验总结</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 10px;">随笔日志</a>
         </div>
     </div>
 
