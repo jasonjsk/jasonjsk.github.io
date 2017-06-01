@@ -19,7 +19,7 @@
 <li>Centos7.3 x64</li>
 </ul>
 </blockquote>
-<p><img src="/images/ELK-Architure.png" alt=""></p>
+<p><img src="/images/ELK-Architure.png" alt=""><br>各组件的简略架构图</p>
 <a id="more"></a>
 <h5 id="ElasticSearch安装过程"><a href="#ElasticSearch安装过程" class="headerlink" title="ElasticSearch安装过程"></a>ElasticSearch安装过程</h5><ul>
 <li>按照官网的操作步骤安装十分简单，第一步，下载并解压，第二步，运行bin/elasticsearch 就完事了</li>
