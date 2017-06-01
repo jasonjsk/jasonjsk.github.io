@@ -223,8 +223,7 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <h5 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h5><p>使用ELK集中管理日志，如集群应用中所有节点的日志放在一起查看，并按日志级别分别过滤，实时监控错误日志，以及对业务一些数据进行分析，如实时车辆位置展示等等。</p>
+            <p><h5 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h5><p>使用ELK集中管理日志，如集群应用中所有节点的日志放在一起查看，并按日志级别分别过滤，实时监控错误日志，以及对业务一些数据进行分析，如实时车辆位置展示等等。</p>
 <h5 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h5><p>作为尝鲜者，选择官网最新版本来尝试</p>
 <blockquote>
 <ul>
@@ -238,75 +237,10 @@
 <li>Centos7.3 x64</li>
 </ul>
 </blockquote>
-<p><img src="images/ELK-Architure.png" alt=""></p>
-<h5 id="ElasticSearch安装过程"><a href="#ElasticSearch安装过程" class="headerlink" title="ElasticSearch安装过程"></a>ElasticSearch安装过程</h5><ul>
-<li>按照官网的操作步骤安装十分简单，第一步，下载并解压，第二步，运行bin/elasticsearch 就完事了</li>
-<li>官网地址：(<a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="external">https://www.elastic.co/downloads/elasticsearch</a>)</li>
-<li>实际在运行的时候可以使用守护方式运行，bin/elasticsearch -d</li>
-<li>安装过程中遇到的几个错误和解决办法</li>
-</ul>
-<blockquote>
-<p>第一个错误：不能使用root用户启动（<font color="BLUE"><b>can not run elasticsearch as root</b></font>）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@appsvr02 bin]<span class="comment"># ./elasticsearch</span></div><div class="line">[2017-05-24T09:19:11,866][WARN ][o.e.b.ElasticsearchUncaughtExceptionHandler] [] uncaught exception <span class="keyword">in</span> thread [main]</div><div class="line">org.elasticsearch.bootstrap.StartupException: java.lang.RuntimeException: can not run elasticsearch as root</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:127) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:114) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:67) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:122) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.cli.Command.main(Command.java:88) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:91) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:84) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">Caused by: java.lang.RuntimeException: can not run elasticsearch as root</div><div class="line">        at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:106) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:204) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:360) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:123) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        ... 6 more</div></pre></td></tr></table></figure></p>
-<p>因此，添加elk帐户： useradd elk， 并把原来目录所有都改为 elk, chown -R 命令。</p>
-<hr>
-<p>第二个错误：内核版本不满足要求(<font color="BLUE"><b>seccomp unavailable: requires kernel 3.5+ with CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER compiled</b></font>)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[elk@lnbAppsvr02 bin]$ ./elasticsearch</div><div class="line">[2017-05-24T09:20:41,418][WARN ][o.e.b.JNANatives         ] unable to install syscall filter: </div><div class="line">java.lang.UnsupportedOperationException: seccomp unavailable: requires kernel 3.5+ with CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER compiled <span class="keyword">in</span></div><div class="line">        at org.elasticsearch.bootstrap.SystemCallFilter.linuxImpl(SystemCallFilter.java:350) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.SystemCallFilter.init(SystemCallFilter.java:638) ~[elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.JNANatives.tryInstallSystemCallFilter(JNANatives.java:215) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Natives.tryInstallSystemCallFilter(Natives.java:99) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:111) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:204) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:360) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.init(Elasticsearch.java:123) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.execute(Elasticsearch.java:114) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.cli.EnvironmentAwareCommand.execute(EnvironmentAwareCommand.java:67) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.cli.Command.mainWithoutErrorHandling(Command.java:122) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.cli.Command.main(Command.java:88) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:91) [elasticsearch-5.4.0.jar:5.4.0]</div><div class="line">        at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:84) [elasticsearch-5.4.0.jar:5.4.0]</div></pre></td></tr></table></figure></p>
-<p>通过官网论坛了解到，这个并不影响，可以不关心，不开启system call功能即可，当然，我是为了搭建生产环境，我重新选择了CentOS7.3,内核就是3.10+了，启动时也不会再有这个错误提示了。</p>
-<p>第三个错误：系统参数配置不满足(<font color="BLUE">max file descriptors，max number of threads，vm.max_map_count</font>)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; max file descriptors [65535] <span class="keyword">for</span> elasticsearch process is too low, increase to at least [65536]</div><div class="line">max number of threads [1024] <span class="keyword">for</span> user [elk] is too low, increase to at least [2048]</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
-<p>解决办法，修改系统内核参数，<br>1.在/etc/sysctl.conf中增加 vm.max_map_count=655360；<br>2.在/etc/security/limit.conf中修改如下参数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># End of file</span></div><div class="line">root soft nofile 1048576</div><div class="line">root hard nofile 1048576</div><div class="line">* soft nofile 1048576</div><div class="line">* hard nofile 1048576</div></pre></td></tr></table></figure></p>
-<p>3.在/etc/security/limit.d/20-nproc.conf中修改* soft nproc 1024为10240，如下所示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">*          soft    nproc     10240</div><div class="line">root       soft    nproc     unlimited</div></pre></td></tr></table></figure></p>
-</blockquote>
-<ul>
-<li>配置文件修改，config/elasticsearch.yml<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http.port: 9200              <span class="comment">###按需进行修改</span></div><div class="line">network.host: 127.0.0.1      <span class="comment">###绑定指定访问IP,如果只允许内网访问则绑定内网IP</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="Kibana安装过程"><a href="#Kibana安装过程" class="headerlink" title="Kibana安装过程"></a>Kibana安装过程</h5><ul>
-<li><p>官网下载安装包(<a href="https://www.elastic.co/downloads/kibana" target="_blank" rel="external">https://www.elastic.co/downloads/kibana</a>)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/kibana/kibana-5.4.0-linux-x86_64.tar.gz</div><div class="line">tar zxvf kibana-5.4.0-linux-x86_64.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>配置config/kibana.yml中elasticsearch.url，elasticsearch.username，elasticsearch.password参数</p>
-</li>
-<li>运行 bin/kibana &amp;</li>
-</ul>
-<h5 id="X-Pack安装过程"><a href="#X-Pack安装过程" class="headerlink" title="X-Pack安装过程"></a>X-Pack安装过程</h5><ul>
-<li>不需要下载，直接作为插件安装在elasticsearch和kibana中</li>
-<li>安装x-pack后登录kibana需要密码，默认密码elastic / changeme<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bin/elasticsearch-plugin install x-pack</div><div class="line">bin/kibana-plugin install x-pack</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="Redis3-2-9安装过程"><a href="#Redis3-2-9安装过程" class="headerlink" title="Redis3.2.9安装过程"></a>Redis3.2.9安装过程</h5><ul>
-<li>官网下载最新版本（<a href="https://redis.io/download）" target="_blank" rel="external">https://redis.io/download）</a></li>
-<li><p>通过命令下载，解压并编译</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">curl -L -O http://download.redis.io/releases/redis-3.2.9.tar.gz</div><div class="line">tar zxvf redis-3.2.9.tar.gz</div><div class="line"><span class="built_in">cd</span> redis-3.2.9</div><div class="line">make</div><div class="line">... <span class="keyword">then</span> copy binary files with prefix redis- to /usr/<span class="built_in">local</span>/redis/bin</div></pre></td></tr></table></figure>
-</li>
-<li><p>修改配置参数，如port,bind,logfile,logpath,dumpfilename,requirepass,rename，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">bind</span> 10.xx.xx.xxx 127.0.0.1          <span class="comment">###仅允许内网和本机访问</span></div><div class="line">protected-mode yes                   <span class="comment">###保护模式开启</span></div><div class="line">port 123456                          <span class="comment">###端口默认为6379，按需修改</span></div><div class="line">daemonize yes                        <span class="comment">###守护模式开启</span></div><div class="line">pidfile /usr/<span class="built_in">local</span>/redis/redis.pid   <span class="comment">###指定pid文件路径和文件名</span></div><div class="line">logfile <span class="string">"/usr/local/redis/redis.log"</span> <span class="comment">###指定日志文件路径和文件名</span></div><div class="line">dbfilename redis.rdb                 <span class="comment">###指定数据文件RDB文件名</span></div><div class="line">dir /usr/<span class="built_in">local</span>/redis/                <span class="comment">###指定数据文件RDB文件的存放路径</span></div><div class="line">requirepass 『YOURPASSWORD』          <span class="comment">###设置访问密码</span></div><div class="line">rename-command CONFIG <span class="string">"OTHERALIAS-0"</span> <span class="comment">###把不安全的命令进行重命名保护</span></div><div class="line">rename-command FLUSHDB <span class="string">"OTHERALIAS-1"</span></div><div class="line">rename-command FLUSHALL <span class="string">"OTHERALIAS-2"</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>REDIS启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/bin/redis-server /usr/<span class="built_in">local</span>/bin/redis.conf &amp;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="Logstash安装过程"><a href="#Logstash安装过程" class="headerlink" title="Logstash安装过程"></a>Logstash安装过程</h5><ul>
-<li><p>官网下载安装包 (<a href="https://www.elastic.co/downloads/logstash" target="_blank" rel="external">https://www.elastic.co/downloads/logstash</a>)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl -L -O https://artifacts.elastic.co/downloads/logstash/logstash-5.4.0.tar.gz</div><div class="line">tar zxvf logstash-5.4.0.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>增加indexer配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">input &#123;</div><div class="line">    redis &#123;</div><div class="line">        host =&gt; <span class="string">"127.0.0.1"</span></div><div class="line">        <span class="built_in">type</span> =&gt; <span class="string">"redis-input"</span></div><div class="line">        data_type =&gt; <span class="string">"list"</span></div><div class="line">        key =&gt; <span class="string">"logindexer_list"</span></div><div class="line">        port =&gt; 36469</div><div class="line">        password =&gt; <span class="string">"YOUR REDIS PASSWORD"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment"># filter configration here</span></div><div class="line">output &#123;</div><div class="line">    elasticsearch &#123;</div><div class="line">         hosts =&gt; [<span class="string">"127.0.0.1:9200"</span>]</div><div class="line">         user =&gt; elastic</div><div class="line">         password =&gt; xxyyzz...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="Filebeat安装过程"><a href="#Filebeat安装过程" class="headerlink" title="Filebeat安装过程"></a>Filebeat安装过程</h5><ul>
-<li>filebeat安装在各台应用服务器上，收集相关的日志内容输出到redis队列中</li>
-<li>官网下载安装(<a href="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.4.0-linux-x86_64.tar.gz" target="_blank" rel="external">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.4.0-linux-x86_64.tar.gz</a>)</li>
-<li><p>分发到应用服务器上安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zxvf filebeat-5.4.0-linux-x86_64.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>复制filebeat.yml为filebeat.lnbapp.yml</p>
-</li>
-<li><p>配置文件位置和输出到redis相关配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">-input_type: <span class="built_in">log</span></div><div class="line">  <span class="comment">#Paths that should be crawled and fetched. Glob based paths.</span></div><div class="line">  paths:</div><div class="line">    <span class="comment">#- /var/log/*.log</span></div><div class="line">    <span class="comment">#- c:\programdata\elasticsearch\logs\*</span></div><div class="line">    - /appserver/tomcat/logs/catalina.out</div><div class="line">	- /..../.../.../logfile</div><div class="line">	<span class="comment">### 多个路径按模板往下添加即可</span></div><div class="line">    <span class="comment">#------------------- Redis output --------------------------</span></div><div class="line">output.redis:</div><div class="line">  enabled: <span class="literal">true</span></div><div class="line">  hosts: [<span class="string">"10.xx.xx.xx:6379"</span>]</div><div class="line">  key: logindexer_list</div><div class="line">  password: YOUR REDIS PASSWORD</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动filebeat</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bin/filebeat <span class="_">-e</span> -c filebeat.lnbapp.yml &amp;</div></pre></td></tr></table></figure></li>
-</ul>
-
+<p><img src="images/ELK-Architure.png" alt=""></p></p>
+            <p class="article-more-link">
+                <a href="/2017/05/24/elksetup/#more">查看更多</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -316,7 +250,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/24/elksetup/" data-id="cj32c2vle00006hr56eovcmf6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/24/elksetup/" data-id="cj3dyf1ls0003der5mpdwdqdq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -470,7 +404,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/23/share-experience-01/" data-id="cj32c2vmu000u6hr5ue47l0mz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/23/share-experience-01/" data-id="cj3dyf1ml000jder5mn8elmem" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -617,7 +551,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/19/rsync-usage/" data-id="cj32c2vly000a6hr5dkko4yi4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/19/rsync-usage/" data-id="cj3dyf1mi000fder57ink8wj7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -769,7 +703,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/06/java-map/" data-id="cj32c2vlv00066hr5gwq6slzo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/06/java-map/" data-id="cj3dyf1mc0009der5q5q3fg57" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -909,7 +843,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/" data-id="cj32c2vlq00056hr5hiqamwmx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/03/java-linked-array-diff/" data-id="cj3dyf1m80008der5lh3yh8ao" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
