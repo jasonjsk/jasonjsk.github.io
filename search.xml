@@ -3,6 +3,41 @@
   
     
     <entry>
+      <title><![CDATA[eclipse打包jar,调用其中类的方法参数名不显示的问题解决]]></title>
+      <url>/2017/06/12/paramargs/</url>
+      <content type="html"><![CDATA[<h5 id="问题场景"><a href="#问题场景" class="headerlink" title="问题场景"></a>问题场景</h5><blockquote>
+<p>在我项目中，我把框架基类都封装在一个jar包中，在项目中，通过引用此jar文件，调用其中的方法，但是在eclipse开发环境中，鼠标指向该方法时，参数名以 arg0, arg1 …方式显示，这样显然在开发过程不是很方便，因为参数名是有含义的，见名知义，降低不必要的沟通成本。</p>
+</blockquote>
+<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><blockquote>
+<p>如果是通过eclipse直接export方法生成jar文件，那么，修改eclipse的其中一个设置：</p>
+<ol>
+<li>Preferences -&gt; Java -&gt; Compiler, “Store information about method parameters”， 勾选上这一项<br><img src="/images/eclipse-compiler-config.png" alt=""></li>
+<li>eclipse会重新编译项目，验证项目等工作</li>
+<li>重新导出jar</li>
+<li>把新jar文件替换进项目</li>
+<li>重启eclipse，再打开项目，就能正常看到jar中定义的方法参数的原名了</li>
+</ol>
+</blockquote>
+<hr>
+<p><img src="/images/eclipse-param-show.png" alt=""><br>OK，大功告成。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> 技术 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 环境搭建 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[elk安装过程]]></title>
       <url>/2017/05/24/elksetup/</url>
       <content type="html"><![CDATA[<h5 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h5><p>使用ELK集中管理日志，如集群应用中所有节点的日志放在一起查看，并按日志级别分别过滤，实时监控错误日志，以及对业务一些数据进行分析，如实时车辆位置展示等等。</p>

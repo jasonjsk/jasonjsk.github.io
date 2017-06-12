@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jinsk.vip/"/>
-  <updated>2017-06-01T05:09:44.000Z</updated>
+  <updated>2017-06-12T13:12:33.000Z</updated>
   <id>http://www.jinsk.vip/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>eclipse打包jar,调用其中类的方法参数名不显示的问题解决</title>
+    <link href="http://www.jinsk.vip/2017/06/12/paramargs/"/>
+    <id>http://www.jinsk.vip/2017/06/12/paramargs/</id>
+    <published>2017-06-12T12:41:12.000Z</published>
+    <updated>2017-06-12T13:12:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="问题场景"><a href="#问题场景" class="headerlink" title="问题场景"></a>问题场景</h5><blockquote>
+<p>在我项目中，我把框架基类都封装在一个jar包中，在项目中，通过引用此jar文件，调用其中的方法，但是在eclipse开发环境中，鼠标指向该方法时，参数名以 arg0, arg1 …方式显示，这样显然在开发过程不是很方便，因为参数名是有含义的，见名知义，降低不必要的沟通成本。</p>
+</blockquote>
+<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><blockquote>
+<p>如果是通过eclipse直接export方法生成jar文件，那么，修改eclipse的其中一个设置：</p>
+<ol>
+<li>Preferences -&gt; Java -&gt; Compiler, “Store information about method parameters”， 勾选上这一项<br><img src="/images/eclipse-compiler-config.png" alt=""></li>
+<li>eclipse会重新编译项目，验证项目等工作</li>
+<li>重新导出jar</li>
+<li>把新jar文件替换进项目</li>
+<li>重启eclipse，再打开项目，就能正常看到jar中定义的方法参数的原名了</li>
+</ol>
+</blockquote>
+<hr>
+<p><img src="/images/eclipse-param-show.png" alt=""><br>OK，大功告成。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;问题场景&quot;&gt;&lt;a href=&quot;#问题场景&quot; class=&quot;headerlink&quot; title=&quot;问题场景&quot;&gt;&lt;/a&gt;问题场景&lt;/h5&gt;&lt;blockquote&gt;
+&lt;p&gt;在我项目中，我把框架基类都封装在一个jar包中，在项目中，通过引用此jar文件，调用其中的方法，但
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.jinsk.vip/Categories/technology/"/>
+    
+    
+      <category term="环境搭建" scheme="http://www.jinsk.vip/Tags/setup/"/>
+    
+  </entry>
   
   <entry>
     <title>elk安装过程</title>
