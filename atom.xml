@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jinsk.vip/"/>
-  <updated>2017-06-12T13:12:33.000Z</updated>
+  <updated>2017-07-11T10:01:38.000Z</updated>
   <id>http://www.jinsk.vip/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>读《三板斧-阿里巴巴管理之道》</title>
+    <link href="http://www.jinsk.vip/2017/07/11/reading20170711/"/>
+    <id>http://www.jinsk.vip/2017/07/11/reading20170711/</id>
+    <published>2017-07-11T09:45:56.000Z</published>
+    <updated>2017-07-11T10:01:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天花了一天的时间，把这本书看完了，谈谈我自己的感悟吧。<br>第一、从这本书中感觉到一个大公司能成功，的确是有一套特别的管理手段<br>第二、管理是一门非常大的学问，要讲道，要讲哲学<br>第三、管好一个团队(产品，企业)要用心用情<br>第四、慈不掌兵，义不长财；对我自己是一个警钟<br>…</p>
+<p>通过读了本书之后，自己领悟到了自己在管理过程中，有些值得小欣慰的地方，也有些做得不够好需要改进的地方，容我好好总结一下不足，列出改进方案去吧…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天花了一天的时间，把这本书看完了，谈谈我自己的感悟吧。&lt;br&gt;第一、从这本书中感觉到一个大公司能成功，的确是有一套特别的管理手段&lt;br&gt;第二、管理是一门非常大的学问，要讲道，要讲哲学&lt;br&gt;第三、管好一个团队(产品，企业)要用心用情&lt;br&gt;第四、慈不掌兵，义不长财；对我自
+    
+    </summary>
+    
+      <category term="随笔" scheme="http://www.jinsk.vip/Categories/essay/"/>
+    
+    
+      <category term="随笔日志" scheme="http://www.jinsk.vip/Tags/diary/"/>
+    
+      <category term="读书" scheme="http://www.jinsk.vip/Tags/reading/"/>
+    
+  </entry>
   
   <entry>
     <title>eclipse打包jar,调用其中类的方法参数名不显示的问题解决</title>
