@@ -122,12 +122,12 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                10
+                11
                 <!-- <span>文章</span> -->
                 <span>文章数</span>
             </div>
             <div class="article-info-block">
-                6
+                7
                 <!-- <span>标签</span> -->
                 <span>标签数</span>
             </div>
@@ -177,6 +177,147 @@
 
             
             <section id="main">
+    <article id="post-diary0829" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/08/29/diary0829/">记在新公司的一些感受</a>
+        </h1>
+    
+
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/08/29/diary0829/">
+            <time datetime="2017-08-29T13:15:05.000Z" itemprop="datePublished">2017-08-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/Categories/essay/">随笔</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/Tags/随笔日记/">随笔日记</a>
+        <span id="busuanzi_container_page_pv">
+  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
+		</span>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <pre><code>时间不等人啊！一眨眼今天是已经在新的公司上班20天了，说说在新公司的感受吧。
+</code></pre><p>公司是一家消费金融公司，发展非常迅猛，重庆作为总部，北京，深圳，成都同时都设有研发中心。公司氛围其实对于我来讲也还是挺习惯的，因为，曾经在IBM见识过比这家公司流程更复杂更正规的例子，所以很迅速就适应了现在的风格。同事之间，感觉也还不错，很友好的，公司里还有不少外籍同事，上周的一个早上，我还和咱们公司一个级别比较高的foriengner聊了聊，虽然感觉到许久未说过的英语有点别扭，但也还是感觉到找回来的希望，另外在团结协作方面也不费劲，即使是各处北京，深圳，重庆多地都没什么问题，这一点我觉得还是挺不错的了。</p>
+<p>说说我的工作内容吧，自从进入公司第一天起，就开始了架构之旅，因为又接手了一个新项目，不过好在业务需求已经有人分析得差不多了，已经有比较详细的需求和原型文档。对于我来说，就是技术选型，搭建应用框架，抽象基础通用功能以及带头编写核心业务功能，提供代码模板。虽然我们项目原定6个人，但是实际仅入职了三个人，最后也就两周时间加班加点就把系统开发完成了。当然这足以证明小伙伴们理解能力和适应能力相当快，很迅速就能按照我的框架进行开发工作。截止昨天，新系统已经提请测试，正式进入测试阶段。</p>
+<p>对于这次的技术选型，我选择的技术框架：springboot, spring cloud, mybaits，前端：jquery, bootstrap, freemarker，数据库：Mysql, 缓存及队列：Redis cluster; 接下来我还会集成更多的新技术，相较之前的SSM, 又更接近流行一点了，主要原因是硬件条件不再是束缚我的因素了。</p>
+<p>另外，我希望，把新项目带上线之后，重心放在人工智能的学习方面，从零开始弥补数学、算法等基础，学习人工智能理论基础知识，再多和内部的架构师们沟通交流，把团队和自己提升得更强。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://www.jinsk.vip/2017/08/29/diary0829/" data-id="cj6xn831q0001qetf64hkhbts" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://www.jinsk.vip/2017/08/29/diary0829/#comments" id="sourceId::2017/08/29/diary0829/" class="article-comment-link cy_cmt_count">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+
     <article id="post-reading20170711" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -236,7 +377,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/07/11/reading20170711/" data-id="cj51t8ydn000j6zr5z72woxgm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/07/11/reading20170711/" data-id="cj6xn832h000lqetfacikigl7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -387,7 +528,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/06/12/paramargs/" data-id="cj51t8ydf00096zr5r4k0tc52" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/06/12/paramargs/" data-id="cj6xn832f000iqetf74tu4khm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -539,7 +680,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/24/elksetup/" data-id="cj51t8ydb00076zr50d26s1w4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/24/elksetup/" data-id="cj6xn831v0003qetf6aw6eqxh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -693,7 +834,7 @@
 
 </div>
 
-    <a data-url="http://www.jinsk.vip/2017/05/23/share-experience-01/" data-id="cj51t8yds000r6zr5cu4o0rl9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://www.jinsk.vip/2017/05/23/share-experience-01/" data-id="cj6xn832j000qqetfoxk3teo2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -772,155 +913,8 @@
 
 
 
-    <article id="post-rsync-usage" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/19/rsync-usage/">rsync的使用-多服务器文件同步</a>
-        </h1>
-    
-
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/19/rsync-usage/">
-            <time datetime="2017-05-19T00:34:13.000Z" itemprop="datePublished">2017-05-19</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/Categories/technology/">技术</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/Tags/setup/">环境搭建</a>
-        <span id="busuanzi_container_page_pv">
-  			本文已阅读<span id="busuanzi_value_page_pv"></span>次
-		</span>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><hr>
-<blockquote>
-<p>产品中有多处上传图片的业务，在最初架构的时候我仅是把静态资源分离开存储了，实际上是通过应用直接写文件到指定目录，由于服务器仅有一台，所以没有问题，通过Nginx自然也就实现了动静资源的分离架构，但是现在增加了几台服务器，因此，不同的用户随机请求到不同的主机上，图片也就保存到各自的服务器上了，通过后台系统就无法集中查看该业务的全部图片，鉴于此，我开始处理这个问题，寻找解决方案。</p>
-</blockquote>
-<h3 id="方案选择"><a href="#方案选择" class="headerlink" title="方案选择"></a>方案选择</h3><hr>
-<blockquote>
-<p>1.定时任务+ftp<br>能实现向文件服务器推送图片文件，但是需要全量或推送完一张然后删除掉本地文件，缺点：操作不方便。</p>
-<p>2.定时任务+scp<br>同方案1一样，如果多服务器之间配置互信免密码，还算可以，写个shell脚本定时可以完成功能。</p>
-<p>3.定时任务+rsync<br>最终我选择的当然是这个方案，rsync的优点是可以增量同步，速度非常快，安全上可以配置只允许内网指定IP同步上传文件，还有个可以配置忽略部分目录同步。</p>
-</blockquote></p>
-            <p class="article-more-link">
-                <a href="/2017/05/19/rsync-usage/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://www.jinsk.vip/2017/05/19/rsync-usage/" data-id="cj51t8ydp000m6zr5vhmt8oun" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://www.jinsk.vip/2017/05/19/rsync-usage/#comments" id="sourceId::2017/05/19/rsync-usage/" class="article-comment-link cy_cmt_count">评论</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-
     <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
 </section>
             
@@ -932,6 +926,25 @@
         <h3 class="widget-title">最近文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/08/29/diary0829/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/Categories/essay/">随笔</a></p>
+                            <p class="item-title"><a href="/2017/08/29/diary0829/" class="title">记在新公司的一些感受</a></p>
+                            <p class="item-date"><time datetime="2017-08-29T13:15:05.000Z" itemprop="datePublished">2017-08-29</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1009,25 +1022,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2017/05/19/rsync-usage/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/Categories/technology/">技术</a></p>
-                            <p class="item-title"><a href="/2017/05/19/rsync-usage/" class="title">rsync的使用-多服务器文件同步</a></p>
-                            <p class="item-date"><time datetime="2017-05-19T00:34:13.000Z" itemprop="datePublished">2017-05-19</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1038,7 +1032,7 @@
         <!-- <h3 class="widget-title">分类</h3> -->
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/Categories/essay/">随笔</a><span class="category-list-count">2</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/Categories/technology/">技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/Categories/essay/">随笔</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1048,7 +1042,7 @@
         <!-- <h3 class="widget-title">归档</h3> -->
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -1057,7 +1051,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/experience/">经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/reading/">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">2</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Tags/Java/">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/setup/">环境搭建</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/experience/">经验总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/reading/">读书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/devops/">运维</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/diary/">随笔日志</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/Tags/随笔日记/">随笔日记</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1066,7 +1060,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/Tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/experience/" style="font-size: 10px;">经验总结</a> <a href="/Tags/reading/" style="font-size: 10px;">读书</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 13.33px;">随笔日志</a>
+            <a href="/Tags/Java/" style="font-size: 16.67px;">Java</a> <a href="/Tags/setup/" style="font-size: 20px;">环境搭建</a> <a href="/Tags/experience/" style="font-size: 10px;">经验总结</a> <a href="/Tags/reading/" style="font-size: 10px;">读书</a> <a href="/Tags/devops/" style="font-size: 10px;">运维</a> <a href="/Tags/diary/" style="font-size: 13.33px;">随笔日志</a> <a href="/Tags/随笔日记/" style="font-size: 10px;">随笔日记</a>
         </div>
     </div>
 
