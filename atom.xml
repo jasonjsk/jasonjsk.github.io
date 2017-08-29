@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.jinsk.vip/"/>
-  <updated>2017-08-29T13:41:42.000Z</updated>
+  <updated>2017-08-29T14:03:45.000Z</updated>
   <id>http://www.jinsk.vip/</id>
   
   <author>
@@ -14,6 +14,307 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>通用过滤器的写法</title>
+    <link href="http://www.jinsk.vip/2017/08/29/commonFilter/"/>
+    <id>http://www.jinsk.vip/2017/08/29/commonFilter/</id>
+    <published>2017-08-29T13:50:26.000Z</published>
+    <updated>2017-08-29T14:03:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>web.xml:</p>
+<p><filter><br>        <filter-name>encoding-filter</filter-name><br>        <filter-class>com.demo.ParameterCharacterFilter</filter-class><br>        <init-param><br>            <param-name>encoding</param-name><br>            <param-value>utf-8</param-value><br>        </init-param><br>        <init-param><br>            <param-name>contentType</param-name><br>            <param-value>text/html;charset=utf-8</param-value><br>        </init-param><br>        <!-- 启用IP限制 --><br>        <init-param><br>            <param-name>resetEnable</param-name><br>            <param-value>false</param-value><br>        </init-param><br>        <!-- 允许访问IP ,注意：禁止访问IP优先允许访问IP 设置IP：192.168.1.120,192.168.1.121 设置IP段：192.168.1.120/190 --><br>        <init-param><br>            <param-name>allow</param-name><br>            <param-value>127.0.0.1</param-value><br>        </init-param><br>        <!-- 禁止访问IP --><br>        <init-param><br>            <param-name>deny</param-name><br>            <param-value></param-value><br>        </init-param><br>        <!-- 不过滤IP访问URL地址多个用逗号隔开 --><br>        <init-param><br>            <param-name>filterurl</param-name><br>            <param-value><br>                /lnb/test,/test<br>            </param-value><br>        </init-param><br>    </filter><br>    <filter-mapping><br>        <filter-name>encoding-filter</filter-name><br>        <url-pattern>/*</url-pattern><br>    </filter-mapping></p>
+<p>现在有 @WebFilter就方便多了，不用再配置xml了。</p>
+<p>public class ParameterCharacterFilter implements Filter{<br>/<em>运行访问IP列表</em>/<br>    public static final String  PARAM_NAME_ALLOW            = “allow”;</p>
+<pre><code>/*限制访问IP列表*/
+public static final String  PARAM_NAME_DENY             = &quot;deny&quot;;
+
+/*不过滤URL地址*/
+public static final String PARAM_NAME_NOURL             = &quot;filterurl&quot;;
+
+/*编码字符集*/
+public static final String CONFIG_ENCODING                = &quot;encoding&quot;;
+
+/*编码类型*/
+public static final String CONFIG_CONTENTTYPE            = &quot;contentType&quot;;
+
+/*是否启用IP控制*/
+public static final String  PARAM_NAME_RESET_ENABLE     = &quot;resetEnable&quot;;
+private final static String TEMPLATE_PAGE_RESOURCE_PATH = &quot;/template.html&quot;;
+private boolean             statService;
+public String               templatePage;
+
+/**
+ * 允许访问IP地址列表
+ */
+private List&lt;IPRange&gt;       allowList                   = new ArrayList&lt;IPRange&gt;();
+
+/**
+ * 禁止访问IP地址列表
+ */
+private List&lt;IPRange&gt;       denyList                    = new ArrayList&lt;IPRange&gt;();
+
+/**
+ * 不过滤URL地址列表
+ */
+private List&lt;String&gt;         nourlList                    = new ArrayList&lt;String&gt;();
+
+private FilterConfig filterConfig;
+private String encoding = &quot;UTF-8&quot;;
+private String contentType = null;
+
+public void init(FilterConfig filterConfig) throws ServletException {
+    this.filterConfig = filterConfig;
+    templatePage = TEMPLATE_PAGE_RESOURCE_PATH;
+
+    //读取字符编码
+    try {
+        String param = this.filterConfig.getInitParameter(CONFIG_ENCODING);
+        if(param != null &amp;&amp; param.trim().length() != 0){
+            encoding = param.trim();
+        }
+    } catch (Exception e) {
+        String msg = &quot;initParameter config error, encoding : &quot; + filterConfig.getInitParameter(CONFIG_ENCODING);
+        logger.log(msg, Logger.LEVEL_ERROR);
+    }
+
+    //读取编码类型
+    try {
+        String param = this.filterConfig.getInitParameter(CONFIG_CONTENTTYPE);
+        if(param != null &amp;&amp; param.trim().length() != 0){
+            contentType = param.trim();
+        }
+    } catch (Exception e) {
+        String msg = &quot;initParameter config error, contentType : &quot; + filterConfig.getInitParameter(CONFIG_ENCODING);
+        logger.log(msg, Logger.LEVEL_ERROR);
+    }
+
+    //读取是否启用状态
+    try {
+         String param = this.filterConfig.getInitParameter(PARAM_NAME_RESET_ENABLE);
+         if (param != null &amp;&amp; param.trim().length() != 0) {
+             param = param.trim();
+             boolean resetEnable = Boolean.parseBoolean(param);
+             statService = resetEnable;
+         }
+
+    }catch (Exception e) {
+        String msg = &quot;initParameter config error, resetEnable : &quot; + this.filterConfig.getInitParameter(PARAM_NAME_RESET_ENABLE);
+        logger.log(msg, Logger.LEVEL_ERROR);
+    }
+
+    //读取可以访问的IP地址
+    try {
+        String param = this.filterConfig.getInitParameter(PARAM_NAME_ALLOW);
+        if (param != null &amp;&amp; param.trim().length() != 0) {
+            param = param.trim();
+            String[] items = param.split(&quot;,&quot;);
+            for (String item : items) {
+                if (item == null || item.length() == 0) {
+                    continue;
+                }
+
+                IPRange ipRange = new IPRange(item);
+                allowList.add(ipRange);
+            }
+        }
+    } catch (Exception e) {
+        String msg = &quot;initParameter config error, allow : &quot; + this.filterConfig.getInitParameter(PARAM_NAME_ALLOW);
+        logger.log(msg, Logger.LEVEL_ERROR);
+    }
+
+    //读取禁止访问IP地址列表
+    try {
+        String param = this.filterConfig.getInitParameter(PARAM_NAME_DENY);
+        if(param != null &amp;&amp; param.trim().length() != 0){
+            param = param.trim();
+            String[] items = param.split(&quot;,&quot;);
+            for(String item : items){
+                if(item == null || item.length() == 0){
+                    continue;
+                }
+                IPRange ipRange = new IPRange(item);
+                denyList.add(ipRange);
+            }
+        }
+    } catch (Exception e) {
+        String msg = &quot;initParameter config error, deny : &quot; + this.filterConfig.getInitParameter(PARAM_NAME_ALLOW);
+        logger.log(msg, Logger.LEVEL_ERROR);
+    }
+
+    //读取不过滤URL
+    try {
+        String param = this.filterConfig.getInitParameter(PARAM_NAME_NOURL);
+        if(param != null &amp;&amp; param.trim().length() != 0){
+            param = param.trim();
+            String[] items = param.split(&quot;,&quot;);
+            for(String item : items){
+                if(item == null || item.length() == 0){
+                    continue;
+                }
+                nourlList.add(item.trim());
+            }
+        }
+    } catch (Exception e) {
+        String msg = &quot;initParameter config error, url : &quot; + this.filterConfig.getInitParameter(PARAM_NAME_NOURL);
+        logger.log(msg, Logger.LEVEL_ERROR);
+    }
+}
+
+public boolean isPermittedRequest(HttpServletRequest request) {
+    String remoteAddress = request.getRemoteAddr();
+    return isPermittedRequest(remoteAddress);
+}
+
+/**
+ * 是否允许请求
+ * @param remoteAddress
+ * @return
+ */
+public boolean isPermittedRequest(String remoteAddress) {
+    boolean ipV6 = remoteAddress != null &amp;&amp; remoteAddress.indexOf(&apos;:&apos;) != -1;
+
+    if (ipV6) {
+        if (denyList.size() == 0 &amp;&amp; allowList.size() == 0) {
+            return true;
+        }
+    }
+
+    IPAddress ipAddress = new IPAddress(remoteAddress);
+
+    for (IPRange range : denyList) {
+        if (range.isIPAddressInRange(ipAddress)) {
+            return false;
+        }
+    }
+
+    if (allowList.size() &gt; 0) {
+        for (IPRange range : allowList) {
+            if (range.isIPAddressInRange(ipAddress)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * 验证用户访问URL是否不过滤
+ * @param remoteUrl 当前用户访问URL
+ * @return 如果不过滤URL列表中存在当前用户访问的URL则返回&lt;code&gt;true&lt;/code&gt; 否则返回&lt;code&gt;false&lt;/code&gt;
+ */
+public boolean isFilterUrl(String remoteUrl){
+    if(nourlList.size() &gt; 0){
+        for(String item : nourlList){
+            if(item.equals(remoteUrl)){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+public void doFilter(ServletRequest request, ServletResponse response,
+        FilterChain filterChain) throws IOException, ServletException {
+    request.setCharacterEncoding(encoding);
+    response.setContentType(contentType);
+    HttpServletRequest req = (HttpServletRequest) request;
+    String requestURI = req.getRequestURI();
+
+    if(isFilterUrl(requestURI)){
+        logger.log(&quot;Don&apos;t filter this URI: &quot; + requestURI,Logger.LEVEL_DEBUG);
+        filterChain.doFilter(request, response);
+        return;
+    }
+
+    if(statService){
+        //当前访问地址不在未过滤地址列表内
+
+    }
+
+    request = new Request((HttpServletRequest) request);
+
+    filterChain.doFilter(request, response);
+}
+
+
+
+public void destroy() {
+    filterConfig = null;
+    encoding = null;
+}
+
+public static String stringFilter(String value) {
+    // 只允许字母和数字
+    // String regEx = &quot;[^a-zA-Z0-9]&quot;;
+    // 清除掉所有特殊字符
+    //String regEx = &quot;[`~!@$&amp;*|&apos;&apos;&lt;&gt;?~！@￥%……&amp;*——|【】‘；’。%，？/]&quot;;
+    String regEx = &quot;&apos;‘；’/&quot;;
+    Pattern p = Pattern.compile(regEx);
+    Matcher m = p.matcher(value);
+    return m.replaceAll(&quot;&quot;).trim();
+}
+
+
+class Request extends HttpServletRequestWrapper {
+
+    @Override
+    public String[] getParameterValues(String name) {
+        String[] values = super.getParameterValues(name);
+        if(values == null)  return null;
+
+        for (int i = 0; i &lt; values.length; i++) {
+            if(values[i] == null || &quot;&quot;.equals(values[i])){
+                continue;
+            }
+
+            String checkBefore = values[i];
+            String checkAfter = StringUtils.stringFilter(values[i]);
+            checkAfter = checkAfter.replaceAll(&quot;[^\\u0000-\\uFFFF]&quot;, &quot;口&quot;);
+            log.info(&quot;检查请求包含非法字符:&quot;+checkBefore + &quot;, 处理后为:&quot; + checkAfter);
+            values[i] = checkAfter;
+
+
+        }
+
+        return values;
+    }
+
+    @Override
+    public String getParameter(String name) {
+        String p = super.getParameter(name);
+        if(p == null)
+            return p;
+        String value = StringUtils.stringFilter(p);
+        return value.replaceAll(&quot;[^\\u0000-\\uFFFF]&quot;, &quot;口&quot;);
+    }
+
+    public Request(HttpServletRequest request) {
+        super(request);
+    }
+
+
+}
+</code></pre><p>}</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;web.xml:&lt;/p&gt;
+&lt;p&gt;&lt;filter&gt;&lt;br&gt;        &lt;filter-name&gt;encoding-filter&lt;/filter-name&gt;&lt;br&gt;        &lt;filter-class&gt;com.demo.ParameterCharacterFilter
+    
+    </summary>
+    
+      <category term="技术" scheme="http://www.jinsk.vip/Categories/technology/"/>
+    
+    
+      <category term="经验总结" scheme="http://www.jinsk.vip/Tags/experience/"/>
+    
+  </entry>
   
   <entry>
     <title>记在新公司的一些感受</title>
